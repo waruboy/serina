@@ -1,0 +1,23 @@
+{% extends 'dasar.jade' %}
+{% block isi_navbar %}
+.nav-collapse.nav-collapse
+						ul.nav 
+							li 
+								a(href="#") Fitur
+							li 
+								a(href="#") Tentang
+							li 
+								a(href="#") Kontak
+						form.navbar-form.pull-right(method="post", action=".")
+							{% csrf_token %}
+							input.span2(type="text", placeholder="Email")
+							input.span2(type="text", placeholder="Password")
+							button.btn(type="submit") Masuk
+{% endblock isi_navbar %}
+{% block badan %}
+
+.container
+	.hero-unit
+		h1 Serina
+
+{% endblock badan %}

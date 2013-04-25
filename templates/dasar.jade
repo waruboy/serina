@@ -1,0 +1,35 @@
+doctype 5
+html
+	head
+		{% block head %}
+		{% block meta %}
+		meta(charset="utf-8")
+		{% endblock meta%}
+
+		title
+			{% block title %} Serina {% endblock title %}
+
+		{% block css %}
+		link(rel="Stylesheet", type="text/css", 
+			href="{{ STATIC_URL }}css/bootstrap.min.css")
+		link(rel="Stylesheet", type="text/css", 
+			href="{{ STATIC_URL }}css/bootstrap-responsive.min.css")
+		link(rel="Stylesheet", type="text/css",
+			href="{{ STATIC_URL }}css/variasi.css")
+		{% endblock css %}
+
+		{% endblock head %}
+	body
+		{% block navbar %}
+		.navbar.navbar-inverse.navbar-fixed-top
+			.navbar-inner
+				.container
+					a.brand(href="#") Serina
+					{% block isi_navbar %}
+					
+					{% endblock isi_navbar %}
+		{% endblock navbar %}
+		{% block badan %}
+
+		{% block skrip %}{% endblock skrip %}
+		{% endblock badan %}
