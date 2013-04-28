@@ -33,7 +33,7 @@ _application = WSGIHandler()
 def application(environ, start_response):
 	os.environ['TUNJUKJARI_DB_USER'] = environ['TUNJUKJARI_DB_USER']
 	os.environ['TUNJUKJARI_DB_PASSWORD'] = environ['TUNJUKJARI_DB_PASSWORD']
-
+	return	_application(environ, start_response)
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
