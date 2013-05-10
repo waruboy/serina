@@ -10,4 +10,5 @@ def detail(request, kode_toko='', kode_pelanggan=''):
 def ubah(request, kode_toko='', kode_pelanggan=''):
 	form = UbahPelangganForm()
 	return render(request, 'pelanggan/ubah.jade', locals())
+	
 

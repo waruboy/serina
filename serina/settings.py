@@ -134,9 +134,10 @@ INSTALLED_APPS = (
     'crispy_forms',
     'south',
 
-    'toko',
+    'katalog',
     'pelanggan',
     'pemilik',
+    'toko',
 )
 
 # A sample logging configuration. The only tangible logging
