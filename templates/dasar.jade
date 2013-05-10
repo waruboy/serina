@@ -1,5 +1,5 @@
 doctype 5
-html
+html(lang="id")
 	head
 		{% block head %}
 		{% block meta %}
@@ -12,10 +12,12 @@ html
 		{% block css %}
 		link(rel="Stylesheet", type="text/css", 
 			href="{{ STATIC_URL }}css/bootstrap.min.css")
-		link(rel="Stylesheet", type="text/css", 
-			href="{{ STATIC_URL }}css/bootstrap-responsive.min.css")
+		//link(rel="Stylesheet", type="text/css", 
+		//	href="{{ STATIC_URL }}css/bootstrap-responsive.min.css")
 		link(rel="Stylesheet", type="text/css",
 			href="{{ STATIC_URL }}css/variasi.css")
+		link(rel="Stylesheet", type="text/css",
+			href="{{ STATIC_URL }}css/dasar.css")
 		{% endblock css %}
 
 		{% endblock head %}
@@ -23,8 +25,8 @@ html
 		{% block navbar %}
 		.navbar.navbar-inverse.navbar-fixed-top
 			.navbar-inner
-				.container
-					a.brand(href="#") Serina
+				.container-fluid
+					a.brand(href="/") Serina
 					{% block isi_navbar %}
 					
 					{% endblock isi_navbar %}

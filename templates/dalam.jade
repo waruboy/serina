@@ -1,21 +1,23 @@
 {% extends 'dasar.jade' %}
 {% block badan %}
-.row
-	.span4		
-		{% block kiri %}
-		.well
-			h4 Terakhir dilihat:
-			| Pelanggan
-			br
-			[daftar pelanggan]
-			br
-			br
-			| Katalog
-			br
-			[daftar item]
-		{% endblock kiri %}
-	.span8
-		{% block isi %}{% endblock isi %}
+.container-fluid
+	.row-fluid
+		.span3		
+			{% block kiri %}
+			.well
+				h4 Terakhir dilihat:
+				| Pelanggan
+				br
+				[daftar pelanggan]
+				br
+				br
+				| Katalog
+				br
+				[daftar item]
+			{% endblock kiri %}
+		.span8
+			{% block isi %}{% endblock isi %}
+
 
 {% block skrip %}{% endblock skrip %}
 {% endblock badan %}

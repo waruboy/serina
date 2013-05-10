@@ -1,1 +1,23 @@
-{% extends 'dalam.jade' %}
+{% extends 'dalam.jade' %} 
+{% block isi %}
+h1 Laut Lepas
+	small Pelanggan
+.well
+	h3 Pelanggan Baru
+	form
+		fieldset
+			input(type="text", placeholder="Nama")
+			br
+			button.btn(type="submit") Tambah Pelanggan
+
+h4 Daftar Pelanggan
+ul
+	li
+		a(href="bambang-yudhoyono/") Bambang Yudhoyono
+	li
+		a(href="") Dahlan Iskan
+	li	
+		a(href="") Gita Wirjawan
+
+
+{% endblock isi %}

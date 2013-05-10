@@ -1,0 +1,37 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+.row-fluid
+	.span8
+		h1 Bambang Yudhoyono
+		h1
+			small Pelanggan
+		.well
+			h4 catatan
+			form
+				textarea.input-block-level(rows="5")
+				br
+				button.btn Catatan Baru
+
+		h4 Catatan Peminjaman
+		
+		p.small 5 Mei 2013
+		ul
+			li Doraemon 12
+			li DragonBall 23
+		| Sampai 21 Mei 2013
+		hr
+	.span4
+
+		.well
+			h4 Data Pelanggan
+			strong Telepon:
+			p 08889997766
+			strong Alamat:
+			p Jalan Kebun Manggis 2 Jakarta Selatan
+			form(action="ubah")
+				fieldset
+					Button Ubah Data
+
+
+
+{% endblock isi %}
