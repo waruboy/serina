@@ -1,0 +1,23 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+h1 Laut Lepas
+	small Kategori
+.well
+	h3 Kategori Baru
+	form
+		fieldset
+			input(type="text", placeholder="Nama")
+			br
+			button.btn(type="submit") Tambah Kategori
+
+h4 Daftar Kategori
+ul
+	li
+		a(href="kamera/") Kamera
+	li
+		a(href="") Lensa
+	li	
+		a(href="") Aksesori
+
+
+{% endblock isi %}

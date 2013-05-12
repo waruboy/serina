@@ -1,0 +1,23 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+h1 Kamera
+	small Kategori
+.well
+	h3 Model Baru
+	form
+		fieldset
+			input(type="text", placeholder="Nama")
+			br
+			button.btn(type="submit") Tambah Model
+
+h4 Daftar Model
+ul
+	li
+		a(href="canon-eos-600d/") Canon EOS 600D
+	li
+		a(href="") Canon EOS M-B1
+	li	
+		a(href="") Fujifilm Finepix S4500
+
+
+{% endblock isi %}

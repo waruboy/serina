@@ -8,10 +8,10 @@
 								a(href="#") Tentang
 							li 
 								a(href="#") Kontak
-						form.navbar-form.pull-right(method="post", action=".")
+						form.navbar-form.pull-right(method="post", action="/")
 							{% csrf_token %}
-							input.span2(type="text", placeholder="Email")
-							input.span2(type="text", placeholder="Password")
+							input.span2#id_email(name="email", type="text", placeholder="Email")
+							input.span2#id_password(name="password", type="password", placeholder="Password")
 							button.btn(type="submit") Masuk
 {% endblock isi_navbar %}
 {% block badan %}

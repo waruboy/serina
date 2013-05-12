@@ -21,11 +21,12 @@ class PemilikManager(BaseUserManager):
 			password=password
 		)
 		user.is_admin = True
+		user.save(using=self._db)
 		return user
 
 class Pemilik(AbstractBaseUser):
 	email =  models.EmailField(
-		verbose_name = 'alamat_email',
+		verbose_name = 'alamat email',
 		max_length=255,
 		unique=True,
 		db_index=True,

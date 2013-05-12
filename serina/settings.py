@@ -170,3 +170,5 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = "pemilik.Pemilik"
+
+LOGIN_URL = "/"
