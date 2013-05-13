@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import (render, redirect)
@@ -9,6 +9,11 @@ from .utils import inisiasi_view
 def toko(request, kode_toko=''):
 	(pemilik, toko) = inisiasi_view(request, kode_toko)
 	return render(request,'toko.jade',locals())
+
+def keluar(request):
+	logout(request)
+	return redirect("/")
+
 
 def depan(request):
 	if request.method == 'POST':

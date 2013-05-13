@@ -1,4 +1,15 @@
 {% extends 'dasar.jade' %}
+
+{% block isi_navbar %}
+.nav-collapse
+	.dropdown.pull-right
+		a.btn.dropdown-toggle(data-toggle="dropdown", href="#") {{ request.user.email }}
+			span.caret
+		ul.dropdown-menu(role="menu", aria-labelledby="dlabel")
+			li 
+				a(href = "/logout/") Logout
+{% endblock isi_navbar %}
+
 {% block badan %}
 .container-fluid
 	.row-fluid
@@ -19,5 +30,9 @@
 			{% block isi %}{% endblock isi %}
 
 
-{% block skrip %}{% endblock skrip %}
+{% block skrip %}
+script(type="text/javascript", src="{{ STATIC_URL }}js/jquery-1.9.1.min.js")
+script(type="text/javascript", src="{{ STATIC_URL }}js/bootstrap.min.js")
+
+{% endblock skrip %}
 {% endblock badan %}

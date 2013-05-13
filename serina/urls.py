@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^logout/$', 'toko.views.keluar', name='logout'),
     url(r'^$', 'toko.views.depan', name='depan'),
     url(r'^(?P<kode_toko>[-\w]+)/$','toko.views.toko', 
     	name='toko'),
