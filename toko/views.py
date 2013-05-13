@@ -7,7 +7,7 @@ from .utils import inisiasi_view
 
 @login_required
 def toko(request, kode_toko=''):
-	(pemilik, toko) = inisiasi_view(request, kode_toko)
+	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	return render(request,'toko.jade',locals())
 
 def keluar(request):

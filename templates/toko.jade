@@ -2,7 +2,7 @@
 
 {% block isi %}
 .page-header
-	h1 LautLepas 
+	h1 {{ toko.nama }} 
 		small Halaman depan
 
 h3 Kelola:
@@ -11,6 +11,7 @@ h3 Kelola:
 		a(href="pelanggan/") Pelanggan
 	.btn.btn-large 
 		a(href="katalog/") Katalog
-	.btn.btn-large Peminjaman
+	.btn.btn-large 
+		a(href="peminjaman/") Peminjaman
 
 {% endblock isi %}
