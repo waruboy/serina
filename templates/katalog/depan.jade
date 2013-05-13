@@ -12,12 +12,9 @@ h1 Laut Lepas
 
 h4 Daftar Kategori
 ul
+	{% for k in kategori %}
 	li
-		a(href="kamera/") Kamera
-	li
-		a(href="") Lensa
-	li	
-		a(href="") Aksesori
-
+		a(href=k.slug+"/") {{ k.nama.title }}
+	{% endfor %}
 
 {% endblock isi %}
