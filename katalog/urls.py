@@ -5,7 +5,7 @@ urlpatterns = patterns('katalog.views',
 	url(r'^(?P<slug_kategori>[-\w]+)/$', 'kategori', 
 		name='katalog_kategori'),
 	url(r'^(?P<slug_kategori>[-\w]+)/(?P<slug_jenis>[-\w]+)/$', 
-		'jenis', name='jenis'),
+		'daftar_item', name='katalog_daftar_item'),
 
 )
 

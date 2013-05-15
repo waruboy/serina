@@ -4,20 +4,18 @@ h1 Kamera
 	small Kategori
 .well
 	h3 Model Baru
-	form
+	form(action="", method="post")
+		{% csrf_token %}
 		fieldset
-			input(type="text", placeholder="Nama")
+			input#id_nama(name="nama",type="text", placeholder="Nama")
 			br
 			button.btn(type="submit") Tambah Model
 
 h4 Daftar Model
 ul
+	{% for j in jenis %}
 	li
-		a(href="canon-eos-600d/") Canon EOS 600D
-	li
-		a(href="") Canon EOS M-B1
-	li	
-		a(href="") Fujifilm Finepix S4500
-
+		a(href="{{ j.slug }}/") {{ j.nama }}
+	{% endfor %}
 
 {% endblock isi %}

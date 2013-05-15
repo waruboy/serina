@@ -1,0 +1,32 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+.row-fluid
+	.span8
+		h1 {{ jenis.nama }}
+		h1
+			small Daftar Item
+		.well
+			h4 Tambah Item
+			form(action="", method="post")
+				{% csrf_token %}
+				{{ form }}
+				br
+				button.btn(type="submit") Item Baru
+
+		h4 Daftar Item
+
+		{% for it in item %}
+		p
+			a(href="{{ it.nama }}/") {{ it }}
+		ul
+			li Status:
+			li Dipinjam:
+			button.btn Masukkan keranjang
+		hr
+		{% endfor %}
+	.span4
+		.well
+			h4 Data
+			| Sewa per unit
+			p {{ jenis.sewa_per_unit }}
+{% endblock isi %}
