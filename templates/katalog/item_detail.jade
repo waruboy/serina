@@ -1,0 +1,26 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+.row-fluid
+	.span8
+		h1 {{ item.nama }}
+		h1
+			small {{ jenis.nama }}
+
+		h4 Daftar Peminjaman
+
+
+		p
+			a(href="") Kapan
+		ul
+			li Status:
+			li Dipinjam:
+			button.btn Masukkan keranjang
+
+	.span4
+		.well
+			h4 Data
+			| Tersedia sejak
+			p {{ item.didaftar|date:"d M Y" }}
+			| Status
+
+{% endblock isi %}

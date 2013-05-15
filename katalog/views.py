@@ -76,4 +76,4 @@ def item_detail(request, kode_toko,
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
 	#item = Item.objects.filter(jenis=jenis)
-	return render(request, 'katalog/daftar_item.jade', locals()) 
+	return render(request, 'katalog/item_detail.jade', locals()) 
