@@ -27,6 +27,8 @@
 	.span4
 		.well
 			h4 Data
+			| Tersedia sejak
+			p {{ jenis.didaftar|date:"d M Y" }}
 			| Sewa per unit
-			p {{ jenis.sewa_per_unit }}
+			p Rp. {{ jenis.sewa_per_unit }}
 {% endblock isi %}
