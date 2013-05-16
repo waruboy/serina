@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'south',
 
     'katalog',
+    'keranjang',
     'pelanggan',
     'pemilik',
     'toko',

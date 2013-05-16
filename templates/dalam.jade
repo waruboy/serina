@@ -1,4 +1,6 @@
 {% extends 'dasar.jade' %}
+{% load keranjang_tags %}
+
 
 {% block isi_navbar %}
 .nav-collapse
@@ -10,7 +12,7 @@
 				a(href = "/logout/") Logout
 	ul.nav.pull-right
 		li 
-			a(href="") Keranjang
+			{% link_keranjang request toko %}
 	
 {% endblock isi_navbar %}
 

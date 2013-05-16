@@ -22,6 +22,8 @@ urlpatterns = patterns('',
     #     include('pelanggan.urls')),
     url(r'^(?P<kode_toko>[-\w]+)/katalog/', 
         include('katalog.urls')),
+    url(r'^(?P<kode_toko>[-\w]+)/keranjang/',
+        include('keranjang.urls')),
     url(r'^(?P<kode_toko>[-\w]+)/pelanggan/', 
     	include('pelanggan.urls')),
 )
