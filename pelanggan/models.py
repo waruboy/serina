@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from toko.models import Toko
 from toko.utils import toko_slugify
@@ -23,5 +24,12 @@ class Pelanggan(models.Model):
 	def clean(self):
 		if not self.slug:
 			toko_slugify(self, self.nama)
+
+	def ambil_url_absolut(self):
+		link = reverse('pelanggan_detail', args=(
+			self.toko.slug,
+			self.slug
+			))
+		return link
 
 

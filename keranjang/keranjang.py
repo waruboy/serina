@@ -1,11 +1,14 @@
 import random
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from katalog.models import Item
+from .models import ItemKeranjang 
 
 ID_KERANJANG_SESSION_KEY = 'id_keranjang'
 
 def _id_keranjang(request):
 	return request.session[ID_KERANJANG_SESSION_KEY]
+
 
 def _buat_id_keranjang():
 	id_keranjang = ''
@@ -16,11 +19,26 @@ def _buat_id_keranjang():
 			0, len(karakter)-1)]
 	return id_keranjang
 
+
+
 def cek_keranjang(request):
 	ada_keranjang = False
 	if request.session.get(ID_KERANJANG_SESSION_KEY):
 		ada_keranjang = True
 	return ada_keranjang
+
+def set_keranjang(request, pelanggan):
+	ada_keranjang = cek_keranjang(request)
+	if not ada_keranjang:
+		id_keranjang = _buat_id_keranjang()
+		request.session[ID_KERANJANG_SESSION_KEY] = id_keranjang
+		keranjang_baru = ItemKeranjang(
+			id_keranjang=id_keranjang,
+			pelanggan=pelanggan,
+			mulai = timezone.now()
+			)
+		keranjang_baru.save()
+
 
 
 def tambah_item_ke_keranjang(request):

@@ -2,18 +2,17 @@
 {% block isi %}
 .row-fluid
 	.span8
-		h1 Bambang Yudhoyono
+		h1 {{ pelanggan.nama.title }}
 		h1
 			small Pelanggan
 		.well
-			h4 catatan
-			form
-				textarea.input-block-level(rows="5")
-				br
-				button.btn Catatan Baru
+			h4 Peminjaman
+			form(method="post", action="")
+				{% csrf_token %}
+				button.btn(type="submit") Peminjaman Baru
 
 		h4 Catatan Peminjaman
-		
+
 		p.small 5 Mei 2013
 		ul
 			li Doraemon 12

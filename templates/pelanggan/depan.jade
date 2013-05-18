@@ -12,12 +12,11 @@ h1 Laut Lepas
 
 h4 Daftar Pelanggan
 ul
-	li
-		a(href="bambang-yudhoyono/") Bambang Yudhoyono
-	li
-		a(href="") Dahlan Iskan
-	li	
-		a(href="") Gita Wirjawan
+	{% for p in pelanggan %}
+	li 
+		a(href="{{ p.ambil_url_absolut }}") {{ p.nama.title }}
+	{% endfor %}
+
 
 
 {% endblock isi %}

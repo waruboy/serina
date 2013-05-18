@@ -11,6 +11,7 @@ class ItemKeranjang(models.Model):
 	selesai = models.DateTimeField(null=True, blank=True)
 	diskon = models.DecimalField(default=0, max_digits=12,
 		decimal_places=2)
+	check_out = models.BooleanField(default=False)
 
 	class Meta:
 		ordering = ['-ditambahkan']
