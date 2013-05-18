@@ -20,7 +20,8 @@ class Kategori(models.Model):
 		return self.nama
 
 	def ambil_url_absolut(self):
-		return  reverse('katalog_kategori', args=(self.toko.slug, self.slug,))
+		return  reverse('katalog_kategori', 
+			args=(self.toko.slug, self.slug,))
 
 class Jenis(models.Model):
 	nama = models.CharField(max_length = 63)
@@ -39,7 +40,11 @@ class Jenis(models.Model):
 		return self.nama
 
 	def ambil_url_absolut(self):
-		return  reverse('katalog_jenis', args=(self.kategori.toko.slug, self.kategori.slug,))
+		return  reverse('katalog_daftar_item', 
+			args=(self.kategori.toko.slug, 
+				self.kategori.slug,
+				self.slug
+				))
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
@@ -60,11 +65,11 @@ class Item(models.Model):
 		return self.nama
 
 	def ambil_url_absolut(self):
-		return  reverse('katalog_detail_item', 
+		return reverse('katalog_item_detail', 
 			args=(self.jenis.kategori.toko.slug, 
 				self.jenis.kategori.slug, 
 				self.jenis.slug,
-				self.nama
+				self.nama,
 				))
 
 	def clean(self):
