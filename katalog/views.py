@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import HiddenInput
 from django.shortcuts import render
 from django.utils.timezone import now
+from keranjang.keranjang import tambah_item_ke_keranjang
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view, toko_slugify
 from .forms import TambahItemForm
@@ -43,11 +44,18 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	form = TambahItemForm(instance=item_baru)
 
 	if request.method=="POST":
-		form = TambahItemForm(request.POST)
-		if form.is_valid():
-			nama = form.cleaned_data['nama']
-			item_baru = Item(nama=nama, jenis=jenis)
-			item_baru.save()
+		postdata = request.POST.copy()
+		# kalau form item baru
+		if postdata['submit'] == "item_baru":
+			form = TambahItemForm(request.POST)
+			if form.is_valid():
+				nama = form.cleaned_data['nama']
+				item_baru = Item(nama=nama, jenis=jenis)
+				item_baru.save()
+		# kalau form tambah item ke keranjang
+		if postdata['submit'] == "tambah_keranjang":
+			tambah_item_ke_keranjang(request)
+
 	form.fields['jenis'].widget = HiddenInput()
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
@@ -69,9 +77,8 @@ def item_detail(request, kode_toko,
 	if request.method=="POST":
 		form = TambahItemForm(request.POST)
 		if form.is_valid():
-			nama = form.cleaned_data['nama']
-			item_baru = Item(nama=nama, jenis=jenis)
-			item_baru.save()
+			postdata = request.POST.copy()
+
 	form.fields['jenis'].widget = HiddenInput()
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])

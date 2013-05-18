@@ -5,4 +5,38 @@ h1 {{ toko.nama }}
 .well
 	h3 {{ keranjang.pelanggan.nama }}
 
+table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
+	caption Isi keranjang sewa
+	thead
+		tr
+			th(scope="col") Model
+			th(scope="col") Item
+			th(scope="col") Sewa/Unit
+			th
+	tbody
+		{% if item %}
+		{% for it in item %}
+		tr
+			td 
+				a(href="{{ it.jenis.ambil_url_absolut }}") {{ it.jenis.nama }}
+			td
+				a(href="{{ it.ambil_url_absolut }}") {{ it.nama }}
+			td
+				{{ it.jenis.sewa_per_unit }}
+			td
+				form(method="post", action="")
+					{% csrf_token %}
+					input(type="hidden", 
+						name="pk_item", 
+						value="{{ it.pk }}")
+					input.btn.btn-small(type="submit",
+						name="submit",
+						value="Hapus")
+		{% endfor %}
+		{% endif %}
+
+{% if not item %}
+| Keranjang kosong
+{% endif %}
+
 {% endblock isi %}

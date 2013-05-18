@@ -19,6 +19,14 @@ def _buat_id_keranjang():
 			0, len(karakter)-1)]
 	return id_keranjang
 
+def _ambil_keranjang(request):
+	id_keranjang = _id_keranjang(request)
+	keranjang = ItemKeranjang.objects.get(
+		id_keranjang=id_keranjang,
+		check_out=False,
+		)
+	return keranjang
+
 
 
 def cek_keranjang(request):
@@ -45,3 +53,7 @@ def tambah_item_ke_keranjang(request):
 	postdata = request.POST.copy()
 	pk_item = postdata.get('pk_item', '')
 	item = get_object_or_404(Item, pk=pk_item)
+	keranjang = _ambil_keranjang(request)
+	if item not in keranjang.item.all():
+		keranjang.item.add(item)
+		keranjang.save()

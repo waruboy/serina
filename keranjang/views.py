@@ -15,4 +15,6 @@ def lihat(request, kode_toko):
 		check_out =  False
 		)
 
+	item = keranjang.item.all()
+
 	return render(request, 'keranjang/lihat.jade', locals())

@@ -64,7 +64,7 @@ class Item(models.Model):
 			args=(self.jenis.kategori.toko.slug, 
 				self.jenis.kategori.slug, 
 				self.jenis.slug,
-				self.slug
+				self.nama
 				))
 
 	def clean(self):
