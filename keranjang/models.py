@@ -12,6 +12,7 @@ class ItemKeranjang(models.Model):
 	diskon = models.DecimalField(default=0, max_digits=12,
 		decimal_places=2)
 	check_out = models.BooleanField(default=False)
+	keterangan = models.TextField(blank=True)
 
 	class Meta:
 		ordering = ['-ditambahkan']

@@ -4,6 +4,7 @@ h1 {{ toko.nama }}
 	small Keranjang Sewa
 .well
 	h3 {{ keranjang.pelanggan.nama }}
+{% if item %}
 table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
 	caption Isi keranjang sewa
 	thead
@@ -13,7 +14,7 @@ table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
 			th(scope="col") Sewa/Unit
 			th
 	tbody
-		{% if item %}
+		
 		{% for it in item %}
 		tr
 			td 
@@ -32,9 +33,13 @@ table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
 						name="submit",
 						value="Hapus")
 		{% endfor %}
-		{% endif %}
 
-{% if not item %}
+form(method="post", action="")
+	{% csrf_token %}
+	input.btn.btn-primary(type="submit", 
+		name="submit", value="Checkout")
+
+{% else %}
 | Keranjang kosong
 {% endif %}
 

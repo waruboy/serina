@@ -23,12 +23,14 @@
 			{% block kiri %}
 			.well
 				h4 Terakhir dilihat:
-				| Pelanggan
+				a(href="{% url 'pelanggan_depan' toko.slug %}") 
+					| Pelanggan
 				br
 				[daftar pelanggan]
 				br
 				br
-				| Katalog
+				a(href="{% url 'katalog_depan' toko.slug %}")
+					| Katalog
 				br
 				[daftar item]
 			{% endblock kiri %}

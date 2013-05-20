@@ -1,0 +1,22 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+h1 Laut Lepas
+	small Pelanggan
+.well
+	h3 Pelanggan Baru
+	form
+		fieldset
+			input(type="text", placeholder="Nama")
+			br
+			button.btn(type="submit") Tambah Pelanggan
+
+h4 Daftar Pelanggan
+ul
+	{% for p in pelanggan %}
+	li 
+		a(href="{{ p.ambil_url_absolut }}") {{ p.nama.title }}
+	{% endfor %}
+
+
+
+{% endblock isi %}

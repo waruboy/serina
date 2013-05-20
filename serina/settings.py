@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'keranjang',
     'pelanggan',
     'pemilik',
+    'peminjaman',
     'toko',
 )
 

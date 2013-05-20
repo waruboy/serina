@@ -19,7 +19,7 @@ def _buat_id_keranjang():
 			0, len(karakter)-1)]
 	return id_keranjang
 
-def _ambil_keranjang(request):
+def ambil_keranjang(request):
 	id_keranjang = _id_keranjang(request)
 	keranjang = ItemKeranjang.objects.get(
 		id_keranjang=id_keranjang,
@@ -34,6 +34,9 @@ def cek_keranjang(request):
 	if request.session.get(ID_KERANJANG_SESSION_KEY):
 		ada_keranjang = True
 	return ada_keranjang
+
+def hapus_cookie_keranjang(request):
+	del request.session[ID_KERANJANG_SESSION_KEY]
 
 def set_keranjang(request, pelanggan):
 	ada_keranjang = cek_keranjang(request)
@@ -53,7 +56,7 @@ def tambah_item_ke_keranjang(request):
 	postdata = request.POST.copy()
 	pk_item = postdata.get('pk_item', '')
 	item = get_object_or_404(Item, pk=pk_item)
-	keranjang = _ambil_keranjang(request)
+	keranjang = ambil_keranjang(request)
 	if item not in keranjang.item.all():
 		keranjang.item.add(item)
 		keranjang.save()

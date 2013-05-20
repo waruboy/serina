@@ -16,3 +16,6 @@ class Toko(models.Model):
 
 	def ambil_url_absolut(self):
 		return reverse('toko', args=(self.slug,))
+
+	def get_absolute_url(self):
+		return self.ambil_url_absolut()
