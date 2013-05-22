@@ -3,6 +3,7 @@ from django.db import models
 from katalog.models import Item
 from pelanggan.models import Pelanggan
 from pemilik.models import Pemilik
+from toko.models import Toko 
 
 class Peminjaman(models.Model):
 	operator = models.ForeignKey(Pemilik)
@@ -16,17 +17,24 @@ class Peminjaman(models.Model):
 	diskon = models.DecimalField(default=0, max_digits=12,
 		decimal_places=2)
 	keterangan = models.TextField(blank=True)
+	dikembalikan = models.BooleanField(default=False)
 
 	class Meta:
 		ordering = ['-ditambahkan']
 
+
 	def __unicode__(self):
-		return "%s %s" % (self.pelanggan.nama,  str(self.mulai))
+		tanggal_mulai = self.mulai.strftime('%d %b %Y')
+		return "%s: %s" % (self.pelanggan.nama, tanggal_mulai)
 
 	def get_absolute_url(self):
-		return reverse('peminjaman_daftar', 
-			args=(self.pelanggan.toko.slug)
+		return reverse('peminjaman_detail', 
+			args=(
+				self.pelanggan.toko.slug,
+				self.pk,
+				)
 			)
+
 
 class ItemPeminjaman(models.Model):
 	item = models.ForeignKey(Item)

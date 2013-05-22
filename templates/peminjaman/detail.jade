@@ -1,0 +1,26 @@
+{% extends 'dalam.jade' %} 
+{% block isi %}
+h1 Detail Peminjaman
+hr
+h1	
+	small {{ peminjaman.pelanggan.nama }}
+p {{ peminjaman.mulai }} - {{ peminjaman.selesai }}
+{% if not peminjaman.dikembalikan %}
+p Belum dikembalikan
+{% else %}
+p Sudah dikembalikan
+{% endif %}
+h4 Yang dipinjam
+ul
+	{% for itpem in item_peminjaman %}
+	li
+		|  {{ itpem.item.jenis }}
+		a(href="{{ itpem.item.get_absolute_url }}"){{ itpem.item.nama }}
+		
+
+	{% endfor %}
+
+
+
+
+{% endblock isi %}

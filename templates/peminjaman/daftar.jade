@@ -1,20 +1,14 @@
 {% extends 'dalam.jade' %} 
 {% block isi %}
 h1 Laut Lepas
-	small Pelanggan
-.well
-	h3 Pelanggan Baru
-	form
-		fieldset
-			input(type="text", placeholder="Nama")
-			br
-			button.btn(type="submit") Tambah Pelanggan
+	small Peminjaman
 
-h4 Daftar Pelanggan
+h4 Peminjaman Pekan Ini
 ul
-	{% for p in pelanggan %}
+	{% for p in peminjaman %}
 	li 
-		a(href="{{ p.ambil_url_absolut }}") {{ p.nama.title }}
+		a(href="{{ p.get_absolute_url }}")
+			| {{ p }}
 	{% endfor %}
 
 

@@ -33,6 +33,10 @@
 					| Katalog
 				br
 				[daftar item]
+				br
+				br
+				a(href="{% url 'peminjaman_daftar' toko.slug %}")
+					| Peminjaman
 			{% endblock kiri %}
 		.span8
 			{% block isi %}{% endblock isi %}

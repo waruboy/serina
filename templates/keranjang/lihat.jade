@@ -1,9 +1,22 @@
 {% extends 'dalam.jade' %} 
+
+{% block css %}
+
+{{ block.super }}
+link(rel="Stylesheet", type="text/css",
+	href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.3.custom.min.css")
+link(rel="Stylesheet", type="text/css",
+	href="{{ STATIC_URL }}css/jquery-ui-timepicker-addon.css")
+
+{% endblock css %}
+
 {% block isi %}
 h1 {{ toko.nama }}
 	small Keranjang Sewa
 .well
 	h3 {{ keranjang.pelanggan.nama }}
+
+
 {% if item %}
 table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
 	caption Isi keranjang sewa
@@ -36,6 +49,11 @@ table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
 
 form(method="post", action="")
 	{% csrf_token %}
+	p Mulai
+	input#mulai(type="text", name="mulai")
+	p Selesai
+	input#selesai(type="text", name="selesai")
+	br
 	input.btn.btn-primary(type="submit", 
 		name="submit", value="Checkout")
 
@@ -44,3 +62,15 @@ form(method="post", action="")
 {% endif %}
 
 {% endblock isi %}
+
+{% block skrip %}
+
+{{ block.super }}
+script(type="text/javascript", 
+	src="{{ STATIC_URL }}/js/jquery-ui-1.10.3.custom.min.js")
+script(type="text/javascript",
+	src="{{ STATIC_URL }}/js/jquery-ui-timepicker-addon.js")
+script(type="text/javascript",
+	src="{{ STATIC_URL }}js/kalender.js")
+
+{% endblock skrip %}
