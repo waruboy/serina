@@ -13,12 +13,15 @@
 
 		h4 Catatan Peminjaman
 
-		p.small 5 Mei 2013
+		{% for peminjaman in catatan_peminjaman %}
+		p {{ peminjaman.0.peminjaman.mulai }}
 		ul
-			li Doraemon 12
-			li DragonBall 23
-		| Sampai 21 Mei 2013
-		hr
+			{% for ai in peminjaman %}
+			li {{ ai.item.nama }}
+			{% endfor %}
+		{% endfor %}
+
+
 	.span4
 
 		.well
