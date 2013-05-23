@@ -5,6 +5,7 @@
 		h1 {{ pelanggan.nama.title }}
 		h1
 			small Pelanggan
+		| Sejak {{ pelanggan.dibuat }}
 		.well
 			h4 Peminjaman
 			form(method="post", action="")
@@ -21,15 +22,25 @@
 			{% endfor %}
 		{% endfor %}
 
+		{% if not catatan_peminjaman %}
+		p.strong Belum ada catatan
+		{% endif %}
+
 
 	.span4
 
 		.well
 			h4 Data Pelanggan
 			strong Telepon:
-			p 08889997766
+			p {{ pelanggan.telepon }}
 			strong Alamat:
-			p Jalan Kebun Manggis 2 Jakarta Selatan
+			p {{ pelanggaen.alamat }}
+			strong Email:
+			p {{ pelanggan.email }}
+			strong ID:
+			p {{ pelanggan.jenis_ID }}: {{ pelanggan.nomor_ID }}
+			strong Keterangan:
+			p {{ pelanggan.keterangan }}
 			form(action="ubah")
 				fieldset
 					Button Ubah Data

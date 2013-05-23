@@ -46,6 +46,12 @@ def ubah(request, kode_toko='', kode_pelanggan=''):
 		toko=toko, 
 		slug=kode_pelanggan)
 	form = UbahPelangganForm(instance=pelanggan)
+	if request.method == "POST":
+		form = UbahPelangganForm(request.POST, 
+			instance=pelanggan)
+		if form.is_valid:
+			form.save()
+			return redirect(pelanggan)
 	return render(request, 'pelanggan/ubah.jade', locals())
 	
 

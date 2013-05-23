@@ -4,9 +4,18 @@ from toko.models import Toko
 from toko.utils import toko_slugify
 
 class Pelanggan(models.Model):
+	PILIHAN_ID = (
+		("KTP", "KTP"),
+		("SIM", "SIM"),
+		("Paspor", "Paspor"),
+		)
 	nama = models.CharField(max_length=255)
 	nomor_ID = models.CharField(max_length=127, blank=True)
-	jenis_ID =  models.CharField(max_length=15, default="KTP")
+	jenis_ID =  models.CharField(
+		max_length=15, 
+		default="KTP",
+		choices=PILIHAN_ID,
+		)
 	telepon = models.CharField(max_length=30, blank=True)
 	alamat = models.TextField(blank=True)
 	email = models.EmailField(blank=True)
@@ -17,6 +26,7 @@ class Pelanggan(models.Model):
 	diubah = models.DateTimeField(auto_now=True)
 	dilihat = models.DateTimeField(null=True, blank=True)
 	slug = models.SlugField(blank=True)
+	keterangan = models.TextField(blank=True)
 
 	def __unicode__(self):
 		return self.nama
