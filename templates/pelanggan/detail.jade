@@ -18,7 +18,10 @@
 		p {{ peminjaman.0.peminjaman.mulai }}
 		ul
 			{% for ai in peminjaman %}
-			li {{ ai.item.nama }}
+			li 
+				| {{ ai.item.jenis.nama }}  
+				a(href="{{ ai.item.get_absolute_url }}")
+					{{ ai.item.nama }}
 			{% endfor %}
 		{% endfor %}
 
