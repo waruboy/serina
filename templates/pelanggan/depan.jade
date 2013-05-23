@@ -1,14 +1,12 @@
 {% extends 'dalam.jade' %} 
+{% load crispy_forms_tags %}
 {% block isi %}
 h1 Laut Lepas
 	small Pelanggan
 .well
 	h3 Pelanggan Baru
-	form
-		fieldset
-			input(type="text", placeholder="Nama")
-			br
-			button.btn(type="submit") Tambah Pelanggan
+	{% crispy form %}
+
 
 h4 Daftar Pelanggan
 ul

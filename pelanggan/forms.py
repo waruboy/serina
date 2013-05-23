@@ -7,7 +7,7 @@ class UbahPelangganForm(ModelForm):
 	class Meta:
 		model = Pelanggan
 		fields = ['nama', 'alamat', 'telepon', 'email']
-	def __init__(self,* args, **kwargs):
+	def __init__(self, *args, **kwargs):
 		super(UbahPelangganForm, self).__init__(*args, **kwargs)
 		self.helper = FormHelper()
 		self.helper.layout = Layout(
@@ -17,3 +17,15 @@ class UbahPelangganForm(ModelForm):
 			Field('email', css_class="input-block-level")
 			)
 		self.helper.add_input(Submit('submit', 'Ubah data'))
+
+class TambahPelangganForm(ModelForm):
+	class Meta:
+		model = Pelanggan
+		fields = ['nama', 'toko']
+	def __init__(self, *args, **kwargs):
+		super(TambahPelangganForm, self).__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.layout = Layout(
+			Field('toko', type="hidden"),
+			)
+		self.helper.add_input(Submit('submit', 'Tambah pelanggan'))

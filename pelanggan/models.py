@@ -32,4 +32,10 @@ class Pelanggan(models.Model):
 			))
 		return link
 
+	def get_absolute_url(self):
+		return self.ambil_url_absolut()
+
+
+
+
 
