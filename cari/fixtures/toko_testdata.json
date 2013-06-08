@@ -1,0 +1,17 @@
+[
+{
+    "pk": 1, 
+    "model": "toko.toko", 
+    "fields": {
+        "nama": "Laut Lepas", 
+        "pemilik": [
+            1
+        ], 
+        "aktif": true, 
+        "diubah": "2013-05-12T12:24:38Z", 
+        "dibuat": "2013-05-12T12:24:38Z", 
+        "dilihat": null, 
+        "slug": "laut-lepas"
+    }
+}
+]

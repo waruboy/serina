@@ -14,10 +14,11 @@ def depan(request, kode_toko=''):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	form = TambahPelangganForm(initial={'toko': toko.pk})
 	if request.method == "POST":
-		postdata = request.POST.copy()
-		form = TambahPelangganForm(postdata)
-		pelanggan_baru = form.save()
-		return redirect (pelanggan_baru)
+		form = TambahPelangganForm(request.POST)
+		if form.is_valid():
+			pelanggan_baru = form.save()
+			return redirect(pelanggan_baru)
+
 	pelanggan = Pelanggan.objects.filter(toko=toko)
 	return render(request, 'pelanggan/depan.jade', locals())
 

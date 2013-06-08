@@ -1,0 +1,16 @@
+{% if p.has_other_pages %}
+
+{% if p.has_previous %}
+a(href="{{ request.path }}?{{ params }}&page={{ p.previous_page_number }}")
+	| &laquo; Sebelumnya
+{% else %}
+	| &laquo; Sebelumnya
+{% endif %}
+| Hal. {{ p.number }} dari {{ paginator.num_pages }} |
+{% if p.has_next %}
+a(href="{{ request.path }}?{{ params }}&page={{ p.next_page_number }}")
+	| Berikutnya &raquo;
+{% else %}
+	| Berikutnya &raquo;
+{% endif %}
+{% endif %}

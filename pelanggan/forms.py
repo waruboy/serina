@@ -32,6 +32,7 @@ class TambahPelangganForm(ModelForm):
 		super(TambahPelangganForm, self).__init__(*args, **kwargs)
 		self.helper = FormHelper()
 		self.helper.layout = Layout(
+			Field('nama'),
 			Field('toko', type="hidden"),
 			)
 		self.helper.add_input(Submit('submit', 'Tambah pelanggan'))

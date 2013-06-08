@@ -1,0 +1,7 @@
+form#cari(action="{% url hasil_cari %", method="get")
+
+	h3
+		label(for="id_q") Cari 
+	div(style="text-align:right;")
+		{{ form.q }}
+		input(type="submit", value="Cari")

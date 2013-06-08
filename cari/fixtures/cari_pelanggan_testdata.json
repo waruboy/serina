@@ -1,0 +1,74 @@
+[
+{
+    "pk": 1, 
+    "model": "pelanggan.pelanggan", 
+    "fields": {
+        "nama": "Bambang Yudhoyono", 
+        "slug": "bambang-yudhoyono", 
+        "nomor_ID": "", 
+        "telepon": "021001", 
+        "diubah": "2013-05-29T21:40:26Z", 
+        "toko": 1, 
+        "jenis_ID": "KTP", 
+        "keterangan": "", 
+        "dibuat": "2013-05-15T11:40:04Z", 
+        "dilihat": "2013-05-29T21:40:26Z", 
+        "alamat": "", 
+        "email": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "pelanggan.pelanggan", 
+    "fields": {
+        "nama": "Gita Wirjawan", 
+        "slug": "gita-wirjawan", 
+        "nomor_ID": "", 
+        "telepon": "", 
+        "diubah": "2013-05-21T02:58:59Z", 
+        "toko": 1, 
+        "jenis_ID": "KTP", 
+        "keterangan": "", 
+        "dibuat": "2013-05-21T02:58:59Z", 
+        "dilihat": "2013-05-23T01:59:51Z", 
+        "alamat": "", 
+        "email": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "pelanggan.pelanggan", 
+    "fields": {
+        "nama": "Chatib Basri", 
+        "slug": "chatib-basri", 
+        "nomor_ID": "", 
+        "telepon": "", 
+        "diubah": "2013-05-23T02:39:53Z", 
+        "toko": 1, 
+        "jenis_ID": "KTP", 
+        "keterangan": "", 
+        "dibuat": "2013-05-23T01:49:57Z", 
+        "dilihat": "2013-05-24T01:39:08Z", 
+        "alamat": "Jakarta", 
+        "email": "chatib.basri@jagoan.com"
+    }
+},
+{
+    "pk": 8, 
+    "model": "pelanggan.pelanggan", 
+    "fields": {
+        "nama": "Dahlan Iskan", 
+        "slug": "dahlan-iskan", 
+        "nomor_ID": "", 
+        "telepon": "", 
+        "diubah": "2013-05-23T01:50:32Z", 
+        "toko": 1, 
+        "jenis_ID": "KTP", 
+        "keterangan": "", 
+        "dibuat": "2013-05-23T01:50:32Z", 
+        "dilihat": "2013-05-23T01:50:32Z", 
+        "alamat": "", 
+        "email": ""
+    }
+}
+]

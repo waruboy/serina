@@ -5,6 +5,7 @@ $(function(){
 		timeText: "Waktu",
 		hourText: "Jam",
 		showMinute: 0,
+		showSecond: 0,
 		onClose: function( selectedDate ) {
 			$("#selesai").datetimepicker( 
 				"option", "minDate", selectedDate);
@@ -17,6 +18,7 @@ $(function(){
 		timeText: "Waktu",
 		hourText: "Jam",
 		showMinute: 0,
+		showSecond: 0,
 		onClose: function( selectedDate ) {
 			$("#mulai").datetimepicker(
 				"option", "maxDate", selectedDate);
