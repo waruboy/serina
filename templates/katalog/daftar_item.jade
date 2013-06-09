@@ -24,6 +24,7 @@
 		ul
 			li Status:
 			li Dipinjam:
+			{% if ada_keranjang %}
 			form(method="POST", action="")
 				{% csrf_token %}
 				input(type="hidden", name="pk_item",
@@ -32,6 +33,7 @@
 					name="submit",
 					value="tambah_keranjang") 
 					| Masukkan keranjang
+			{% endif %}
 		hr
 		{% endfor %}
 	.span4

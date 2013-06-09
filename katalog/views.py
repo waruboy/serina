@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import HiddenInput
 from django.shortcuts import render
 from django.utils.timezone import now
-from keranjang.keranjang import tambah_item_ke_keranjang
+from keranjang.keranjang import cek_keranjang, tambah_item_ke_keranjang
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view, toko_slugify
 from .forms import TambahItemForm
@@ -57,7 +57,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 		if postdata['submit'] == "tambah_keranjang":
 			tambah_item_ke_keranjang(request)
 
-	
+	ada_keranjang = cek_keranjang(request)
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
 	item = Item.objects.filter(jenis=jenis)
