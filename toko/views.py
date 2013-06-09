@@ -16,6 +16,9 @@ def keluar(request):
 
 
 def depan(request):
+	if request.user:
+		toko = request.user.toko_set.all()[0]
+		return redirect(toko)
 	if request.method == 'POST':
 		email = request.POST['email']
 		password = request.POST['password']
