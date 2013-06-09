@@ -14,9 +14,10 @@ def depan(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	if request.method=="POST":
 		nama = request.POST['nama']
-		kategori_baru = Kategori(nama=nama, toko=toko)
-		toko_slugify(kategori_baru, nama)
-		kategori_baru.save()
+		if nama != '':
+			kategori_baru = Kategori(nama=nama, toko=toko)
+			toko_slugify(kategori_baru, nama)
+			kategori_baru.save()
 	kategori = Kategori.objects.filter(toko=toko)
 	return render(request, 'katalog/depan.jade', locals()) 
 
@@ -42,7 +43,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	jenis = Jenis.objects.get(kategori=kategori, slug=slug_jenis)
 	item_baru = Item(jenis=jenis)
 	form = TambahItemForm(instance=item_baru)
-
+	form.fields['jenis'].widget = HiddenInput()
 	if request.method=="POST":
 		postdata = request.POST.copy()
 		# kalau form item baru
@@ -56,7 +57,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 		if postdata['submit'] == "tambah_keranjang":
 			tambah_item_ke_keranjang(request)
 
-	form.fields['jenis'].widget = HiddenInput()
+	
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
 	item = Item.objects.filter(jenis=jenis)
