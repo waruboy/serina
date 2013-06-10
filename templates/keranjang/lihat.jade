@@ -54,12 +54,21 @@ form(method="post", action="")
 	p Selesai
 	input#selesai(type="text", name="selesai")
 	br
-	input.btn.btn-primary(type="submit", 
+	input.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="Checkout")
+	input.btn.btn-large.btn-danger.pull-right(type="submit", 
+		name="submit", value="Batal")
+
+
 
 {% else %}
 | Keranjang kosong
+form(method="post", action="")
+	{% csrf_token %}
+	input.btn.btn-large.btn-danger.pull-right(type="submit", 
+		name="submit", value="Batal")
 {% endif %}
+
 
 {% endblock isi %}
 

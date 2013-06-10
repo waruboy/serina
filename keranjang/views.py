@@ -5,7 +5,7 @@ from peminjaman.utils import checkout
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
 from .models import ItemKeranjang
-from .keranjang import ID_KERANJANG_SESSION_KEY
+from .keranjang import ID_KERANJANG_SESSION_KEY, hapus_keranjang
 
 @login_required
 @cek_izin
@@ -27,6 +27,9 @@ def lihat(request, kode_toko):
 			del item_dihapus
 		if postdata['submit'] == "Checkout":
 			checkout(request)
+			return redirect(toko)
+		if postdata['submit'] == "Batal":
+			hapus_keranjang(request)
 			return redirect(toko)
 	item = keranjang.item.all()
 

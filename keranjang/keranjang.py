@@ -60,3 +60,10 @@ def tambah_item_ke_keranjang(request):
 	if item not in keranjang.item.all():
 		keranjang.item.add(item)
 		keranjang.save()
+
+def hapus_keranjang(request):
+	keranjang = ambil_keranjang(request)
+	keranjang.check_out = True
+	keranjang.keterangan = "Batal"
+	keranjang.save(update_fields=['keterangan', 'check_out'])
+	hapus_cookie_keranjang(request)
