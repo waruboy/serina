@@ -72,6 +72,9 @@ class Item(models.Model):
 				self.nama,
 				))
 
+	def get_absolute_url(self):
+		return self.ambil_url_absolut()
+
 	def clean(self):
 		nama_ganda = Item.objects.filter(jenis=self.jenis, nama=self.nama)
 		if self.pk:
