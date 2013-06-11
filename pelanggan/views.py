@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from keranjang.keranjang import set_keranjang
@@ -19,7 +20,7 @@ def depan(request, kode_toko=''):
 			pelanggan_baru = form.save()
 			return redirect(pelanggan_baru)
 
-	pelanggan = Pelanggan.objects.filter(toko=toko)
+	pelanggan = Pelanggan.objects.filter(toko=toko, diaktifkan=True)
 	return render(request, 'pelanggan/depan.jade', locals())
 
 @login_required
@@ -36,7 +37,14 @@ def detail(request, kode_toko='', kode_pelanggan=''):
 		item_peminjaman = ItemPeminjaman.objects.filter(peminjaman=p)
 		catatan_peminjaman.append(item_peminjaman)
 	if request.method == "POST":
-		set_keranjang(request, pelanggan)
+		datapost = request.POST.copy()
+		if datapost['submit'] == "Peminjaman Baru":
+			set_keranjang(request, pelanggan)
+		if datapost['submit'] == "hapus":
+			pelanggan.diaktifkan = False
+			pelanggan.save(update_fields=['diaktifkan',])
+			return redirect(reverse('pelanggan_depan', args=[toko.slug,]))
+	
 	return render(request, 'pelanggan/detail.jade', locals())
 
 @login_required

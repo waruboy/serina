@@ -21,7 +21,8 @@ class Pelanggan(models.Model):
 	email = models.EmailField(blank=True)
 
 	toko = models.ForeignKey(Toko)
-	
+
+	diaktifkan = models.BooleanField(default=True)
 	dibuat = models.DateTimeField(auto_now_add=True)
 	diubah = models.DateTimeField(auto_now=True)
 	dilihat = models.DateTimeField(null=True, blank=True)
