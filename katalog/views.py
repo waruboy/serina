@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse 
 from django.forms import HiddenInput
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.utils.timezone import now
 from keranjang.keranjang import cek_keranjang, tambah_item_ke_keranjang
 from toko.decorators import cek_izin
@@ -78,6 +79,8 @@ def item_detail(request, kode_toko,
 	if request.method=="POST":
 		item.aktif = False
 		item.save(update_fields=['aktif'])
+		return redirect(reverse('katalog_daftar_item', 
+			args=[toko.slug, kategori.slug, jenis.slug]))
 
 	form.fields['jenis'].widget = HiddenInput()
 	jenis.dilihat = now()
