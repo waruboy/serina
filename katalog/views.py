@@ -60,7 +60,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	ada_keranjang = cek_keranjang(request)
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
-	item = Item.objects.filter(jenis=jenis)
+	item = Item.objects.filter(jenis=jenis, aktif=True)
 	return render(request, 'katalog/daftar_item.jade', locals()) 
 
 @login_required
@@ -76,9 +76,8 @@ def item_detail(request, kode_toko,
 	form = TambahItemForm(instance=item_baru)
 
 	if request.method=="POST":
-		form = TambahItemForm(request.POST)
-		if form.is_valid():
-			postdata = request.POST.copy()
+		item.aktif = False
+		item.save(update_fields=['aktif'])
 
 	form.fields['jenis'].widget = HiddenInput()
 	jenis.dilihat = now()

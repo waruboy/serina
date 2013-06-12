@@ -14,13 +14,17 @@
 		ul
 			li Status:
 			li Dipinjam:
-			button.btn Masukkan keranjang
-
 	.span4
 		.well
 			h4 Data
 			| Tersedia sejak
 			p {{ item.didaftar|date:"d M Y" }}
 			| Status
+
+		.well
+			h4 Hapus
+			form(action="", method="post")
+				{% csrf_token %}
+				button.btn.btn-danger(type="submit", name="submit", value="hapus") Hapus Item
 
 {% endblock isi %}
