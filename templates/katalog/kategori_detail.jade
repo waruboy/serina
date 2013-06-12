@@ -1,21 +1,34 @@
 {% extends 'dalam.jade' %} 
 {% block isi %}
 h1 Kamera
-	small Kategori
-.well
-	h3 Model Baru
-	form(action="", method="post")
-		{% csrf_token %}
-		fieldset
-			input#id_nama(name="nama",type="text", placeholder="Nama")
-			br
-			button.btn(type="submit") Tambah Model
+		small Kategori
+.row
+	.span8
+		
+		.well
+			h3 Model Baru
+			form(action="", method="post")
+				{% csrf_token %}
+				fieldset
+					input#id_nama(name="nama",type="text", placeholder="Nama")
+					br
+					button.btn(type="submit", name="submit",
+						value="tambah") 
+						| Tambah Model
 
-h4 Daftar Model
-ul
-	{% for j in jenis %}
-	li
-		a(href="{{ j.slug }}/") {{ j.nama }}
-	{% endfor %}
-
+		h4 Daftar Model
+		ul
+			{% for j in jenis %}
+			li
+				a(href="{{ j.slug }}/") {{ j.nama }}
+			{% endfor %}
+	.span4
+		.well
+			h4 Hapus
+			form(action="", method="post")
+				{% csrf_token %}
+				button.btn.btn-danger(type="submit",
+					name="submit", value="hapus")
+					| Hapus Kategori
+					
 {% endblock isi %}

@@ -19,7 +19,7 @@ def depan(request, kode_toko):
 			kategori_baru = Kategori(nama=nama, toko=toko)
 			toko_slugify(kategori_baru, nama)
 			kategori_baru.save()
-	kategori = Kategori.objects.filter(toko=toko)
+	kategori = Kategori.objects.filter(toko=toko, aktif=True)
 	return render(request, 'katalog/depan.jade', locals()) 
 
 @login_required
@@ -28,9 +28,16 @@ def kategori(request, kode_toko, slug_kategori):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	kategori = Kategori.objects.get(toko=toko, slug=slug_kategori)
 	if request.method=="POST":
-		nama = request.POST['nama']
-		jenis_baru = Jenis(nama=nama, kategori=kategori)
-		jenis_baru.save()
+		postdata = request.POST.copy()
+		if postdata['submit'] == "tambah":
+			nama = request.POST['nama']
+			jenis_baru = Jenis(nama=nama, kategori=kategori)
+			jenis_baru.save()
+		if postdata['submit'] == "hapus":
+			kategori.aktif = False
+			kategori.save(update_fields=['aktif'])
+			return redirect(reverse(
+						'katalog_depan', args=[toko.slug]))
 	kategori.dilihat = now()
 	kategori.save(update_fields=['dilihat'])
 	jenis = Jenis.objects.filter(kategori=kategori, aktif=True)
