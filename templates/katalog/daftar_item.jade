@@ -43,4 +43,12 @@
 			p {{ jenis.didaftar|date:"d M Y" }}
 			| Sewa per unit
 			p Rp. {{ jenis.sewa_per_unit }}
+		.well
+			h4 Hapus
+			form(method="post", action="")
+				{% csrf_token %}
+				button.btn.btn-danger(type="submit",
+					name="submit",
+					value="hapus")
+					| Hapus Model
 {% endblock isi %}

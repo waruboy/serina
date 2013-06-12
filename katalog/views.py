@@ -33,7 +33,7 @@ def kategori(request, kode_toko, slug_kategori):
 		jenis_baru.save()
 	kategori.dilihat = now()
 	kategori.save(update_fields=['dilihat'])
-	jenis = Jenis.objects.filter(kategori=kategori)
+	jenis = Jenis.objects.filter(kategori=kategori, aktif=True)
 	return render(request, 'katalog/kategori_detail.jade', locals()) 
 
 @login_required
@@ -41,7 +41,8 @@ def kategori(request, kode_toko, slug_kategori):
 def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	kategori = Kategori.objects.get(toko=toko, slug=slug_kategori)
-	jenis = Jenis.objects.get(kategori=kategori, slug=slug_jenis)
+	jenis = Jenis.objects.get(kategori=kategori, 
+		slug=slug_jenis)
 	item_baru = Item(jenis=jenis)
 	form = TambahItemForm(instance=item_baru)
 	
@@ -57,6 +58,11 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 		# kalau form tambah item ke keranjang
 		if postdata['submit'] == "tambah_keranjang":
 			tambah_item_ke_keranjang(request)
+		if postdata['submit'] == "hapus":
+			jenis.aktif = False
+			jenis.save(update_fields=['aktif'])
+			return redirect(reverse('katalog_kategori', 
+				args=[toko.slug, kategori.slug]))
 	form.fields['jenis'].widget = HiddenInput()
 	ada_keranjang = cek_keranjang(request)
 	jenis.dilihat = now()
