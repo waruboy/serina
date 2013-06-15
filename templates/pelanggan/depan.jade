@@ -3,18 +3,30 @@
 {% block isi %}
 h1 Laut Lepas
 	small Pelanggan
-.well
-	h3 Pelanggan Baru
-	{% crispy form %}
+.row
+	.span8
+		.well
+			h3 Pelanggan Baru
+			{% crispy form %}
 
 
-h4 Daftar Pelanggan
-ul
-	{% for p in pelanggan %}
-	li 
-		a(href="{{ p.ambil_url_absolut }}") {{ p.nama.title }}
-	{% endfor %}
-
+		h4 Daftar Pelanggan
+		ul
+			{% for p in pelanggan %}
+			li 
+				a(href="{{ p.ambil_url_absolut }}") {{ p.nama.title }}
+			{% endfor %}
+	.span4
+		.well
+			h4 Cari Pelanggan
+			form(action="{% url 'cari_hasil' toko.slug %}", method="get")
+				input#q(
+					type="text", 
+					name="q", 
+					placeholder="telepon"
+					) 
+				button.btn(type="submit",
+					name="submit", value="cari") Cari
 
 
 {% endblock isi %}

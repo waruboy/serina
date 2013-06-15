@@ -1,0 +1,15 @@
+{% extends 'dalam.jade' %}
+
+{% block isi %}
+
+h1 Pelanggan
+p Pencarian telepon: {{ q }}
+{% for pelanggan in cocok.pelanggan %}
+a(href="{{ pelanggan.get_absolute_url }}") {{ pelanggan.nama }}
+
+{% empty %}
+em Tidak ada pelanggan yang cocok.
+
+{% endfor %}
+
+{% endblock isi %}
