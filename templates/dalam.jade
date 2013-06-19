@@ -37,6 +37,10 @@
 				br
 				a(href="{% url 'peminjaman_daftar' toko.slug %}")
 					| Peminjaman
+				br
+				br
+				a(href="{% url 'pesanan_lihat' toko.slug %}")
+					| Pesanan
 			{% endblock kiri %}
 		.span8
 			{% block isi %}{% endblock isi %}

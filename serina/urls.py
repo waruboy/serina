@@ -30,4 +30,6 @@ urlpatterns = patterns('',
     	include('pelanggan.urls')),
     url(r'^(?P<kode_toko>[-\w]+)/peminjaman/',
         include('peminjaman.urls')),
+    url(r'^(?P<kode_toko>[-\w]+)/pesanan/',
+        include('pesanan.urls')),
 )
