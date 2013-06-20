@@ -17,7 +17,7 @@ h1 {{ toko.nama }}
 	h3 {{ pesanan.pelanggan.nama }}
 
 
-{% if item %}
+{% if pesanan %}
 table.table.table-bordered#tabel_pesanan(summary="Daftar Pesanan")
 	caption Isi keranjang sewa
 	thead
@@ -54,8 +54,12 @@ form(method="post", action="")
 	p Selesai
 	input#selesai(type="text", name="selesai")
 	br
+	{% if pesanan.pelanggan %}
 	input.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="Checkout")
+	{% else %}
+	em Pelanggan belum ditentukan
+	{% endif %}
 	input.btn.btn-large.btn-danger.pull-right(type="submit", 
 		name="submit", value="Batal")
 

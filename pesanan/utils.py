@@ -13,6 +13,18 @@ def _buat_id_pesanan():
 			0, len(karakter)-1)]
 	return id_pesanan
 
+def _id_pesanan(request):
+	return request.session[ID_PESANAN_SESSION_KEY]
+
+def ambil_pesanan(request):
+	id_pesanan = _id_pesanan(request)
+	pesanan = Pesanan.objects.get(
+		id_pesanan=id_pesanan,
+		check_out=False,
+		)
+	return pesanan
+
+
 def cek_pesanan(request):
 	ada_pesanan = False
 	if request.session.get(ID_PESANAN_SESSION_KEY):
@@ -30,3 +42,13 @@ def buat_pesanan(request):
 			awal = timezone.now()
 			)
 		pesanan_baru.save()
+
+def _hapus_cookie_pesanan(request):
+	del request.session[ID_PESANAN_SESSION_KEY]
+
+def hapus_pesanan(request):
+	pesanan = ambil_pesanan(request)
+	pesanan.aktif = False
+	pesanan.keterangan = "Batal"
+	pesanan.save(update_fields=['keterangan', 'aktif'])
+	_hapus_cookie_pesanan(request)
