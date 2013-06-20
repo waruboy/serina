@@ -55,6 +55,7 @@ form(method="post", action="")
 	input#selesai(type="text", name="selesai")
 	br
 	{% if pesanan.pelanggan %}
+	p Pelanggan: {{ pesanan.pelanggan }}
 	input.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="Checkout")
 	{% else %}

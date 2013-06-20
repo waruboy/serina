@@ -6,6 +6,7 @@ from keranjang.keranjang import set_keranjang
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
 from peminjaman.models import ItemPeminjaman, Peminjaman
+from pesanan.utils import cantumkan_pelanggan, cek_pesanan
 from .forms import TambahPelangganForm, UbahPelangganForm
 from .models import Pelanggan 
 
@@ -33,6 +34,7 @@ def detail(request, kode_toko='', kode_pelanggan=''):
 	pelanggan.save(update_fields=['dilihat'])
 	peminjaman = Peminjaman.objects.filter(pelanggan=pelanggan)
 	catatan_peminjaman = []
+	ada_pesanan = cek_pesanan(request)
 	for p in peminjaman:
 		item_peminjaman = ItemPeminjaman.objects.filter(peminjaman=p)
 		catatan_peminjaman.append(item_peminjaman)
@@ -40,6 +42,8 @@ def detail(request, kode_toko='', kode_pelanggan=''):
 		datapost = request.POST.copy()
 		if datapost['submit'] == "Peminjaman Baru":
 			set_keranjang(request, pelanggan)
+		if datapost['submit'] == "pesanan":
+			cantumkan_pelanggan(request, pelanggan)
 		if datapost['submit'] == "hapus":
 			pelanggan.diaktifkan = False
 			pelanggan.save(update_fields=['diaktifkan',])

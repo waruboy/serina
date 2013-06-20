@@ -24,6 +24,11 @@ def ambil_pesanan(request):
 		)
 	return pesanan
 
+def cantumkan_pelanggan(request, pelanggan):
+	pesanan = ambil_pesanan(request)
+	pesanan.pelanggan = pelanggan
+	pesanan.save(update_fields=['pelanggan'])
+
 
 def cek_pesanan(request):
 	ada_pesanan = False
