@@ -49,11 +49,10 @@ table.table.table-bordered#tabel_pesanan(summary="Daftar Pesanan")
 
 form(method="post", action="")
 	{% csrf_token %}
-	p Mulai
-	input#mulai(type="text", name="mulai")
-	p Selesai
-	input#selesai(type="text", name="selesai")
-	br
+
+	p Awal: {{ pesanan.awal }}
+	p Akhir: {{ pesanan.akhir }}
+	
 	{% if pesanan.pelanggan %}
 	p Pelanggan: {{ pesanan.pelanggan }}
 	input.btn.btn-large.btn-primary(type="submit", 
@@ -67,10 +66,12 @@ form(method="post", action="")
 
 
 {% else %}
-| Tidak ada pesanan
+p
+	em Tidak ada pesanan
 form(method="post", action="")
 	{% csrf_token %}
-	button.btn.btn-large.btn-primary.pull-right(type="submit", 
+	{{ form.as_p }}
+	button.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="buat") Buat pesanan
 {% endif %}
 
@@ -85,6 +86,6 @@ script(type="text/javascript",
 script(type="text/javascript",
 	src="{{ STATIC_URL }}/js/jquery-ui-timepicker-addon.js")
 script(type="text/javascript",
-	src="{{ STATIC_URL }}js/kalender.js")
+	src="{{ STATIC_URL }}js/pesanan.js")
 
 {% endblock skrip %}

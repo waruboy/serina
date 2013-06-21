@@ -36,19 +36,22 @@ def cek_pesanan(request):
 		ada_pesanan = True
 	return ada_pesanan
 
-def buat_pesanan(request):
+def buat_pesanan(request, form):
 	ada_pesanan = cek_pesanan(request)
 	if not ada_pesanan:
 		id_pesanan = _buat_id_pesanan()
 		request.session[ID_PESANAN_SESSION_KEY] = id_pesanan
+		awal = form.cleaned_data['awal']
+		akhir = form.cleaned_data['akhir']
 		pesanan_baru = Pesanan(
 			id_pesanan=id_pesanan,
 			pemilik = request.user,
-			awal = timezone.now()
+			awal = awal,
+			akhir = akhir,
 			)
 		pesanan_baru.save()
 
-def _hapus_cookie_pesanan(request):
+def hapus_cookie_pesanan(request):
 	del request.session[ID_PESANAN_SESSION_KEY]
 
 def hapus_pesanan(request):
@@ -56,4 +59,4 @@ def hapus_pesanan(request):
 	pesanan.aktif = False
 	pesanan.keterangan = "Batal"
 	pesanan.save(update_fields=['keterangan', 'aktif'])
-	_hapus_cookie_pesanan(request)
+	hapus_cookie_pesanan(request)

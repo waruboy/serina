@@ -4,24 +4,37 @@ from django.shortcuts import redirect, render
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
 
+from .forms import BuatPesananForm
 from .models import Pesanan
 from .utils import (ambil_pesanan, buat_pesanan, cek_pesanan, 
-	hapus_pesanan)
+	hapus_cookie_pesanan, hapus_pesanan)
 
 @login_required
 @cek_izin
 def lihat(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
-
+	ada_pesanan = cek_pesanan(request)
+	
+	form = BuatPesananForm()
 
 	if request.method == "POST":
 		postdata = request.POST.copy()
 		if postdata["submit"] == "buat":
-			buat_pesanan(request)
+			form = BuatPesananForm(request.POST)
+			if form.is_valid():
+				buat_pesanan(request, form)
+				ada_pesanan = True
+
 		if postdata["submit"] == "Batal":
 			hapus_pesanan(request)
 			return redirect(toko)
-	ada_pesanan = cek_pesanan(request)
+
 	if ada_pesanan:
-		pesanan = ambil_pesanan(request)
+		try:
+			pesanan = ambil_pesanan(request)
+		except Pesanan.DoesNotExist:
+			hapus_cookie_pesanan(request)
+			return redirect(request.path)
+	
+
 	return render(request, 'pesanan/lihat.jade', locals())

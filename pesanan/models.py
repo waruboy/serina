@@ -21,6 +21,6 @@ class Pesanan(models.Model):
 
 	def __unicode__(self):
 		if self.pelanggan:
-			return "%s %s" % (self.pelanggan.nama,  str(self.mulai))
+			return "%s %s" % (self.pelanggan.nama,  "draft")
 		else:
 			return "draft %s" % (self.pemilik)
