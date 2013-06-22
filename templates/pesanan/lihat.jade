@@ -53,8 +53,12 @@ form(method="post", action="")
 	p Pelanggan: 
 		a(href="{{ pesanan.pelanggan.get_absolute_url }}")
 			{{ pesanan.pelanggan }}
+	{% if pesanan.item.all %}
 	input.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="Checkout")
+	{% else %}
+	em Pesanan masih kosong
+	{% endif %}
 	{% else %}
 	em Pelanggan belum ditentukan
 	{% endif %}

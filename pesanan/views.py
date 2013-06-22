@@ -39,6 +39,13 @@ def lihat(request, kode_toko):
 			pesanan.save()
 			del item_dihapus
 
+		if postdata['submit'] == "Checkout":
+			pesanan = ambil_pesanan(request)
+			pesanan.check_out = True
+			pesanan.save()
+			hapus_cookie_pesanan(request)
+			return redirect(toko)
+
 	if ada_pesanan:
 		try:
 			pesanan = ambil_pesanan(request)
