@@ -18,9 +18,9 @@
 
 		h4 Daftar Item
 
-		{% for it in item %}
+		{% for stat_item in grup_stat_item %}
 		p
-			a(href="{{ it.nama }}/") {{ it }}
+			a(href="{{ stat_item.item.nama }}/") {{ stat_item.item }}
 		ul
 			li Status:
 			li Dipinjam:
@@ -28,7 +28,7 @@
 			form(method="POST", action="")
 				{% csrf_token %}
 				input(type="hidden", name="pk_item",
-				 value="{{ it.pk }}")
+				 value="{{ stat_item.item.pk }}")
 				button.btn(type="submit",
 					name="submit",
 					value="tambah_keranjang") 

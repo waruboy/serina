@@ -65,6 +65,10 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 		# kalau form tambah item ke keranjang
 		if postdata['submit'] == "tambah_keranjang":
 			tambah_item_ke_keranjang(request)
+			return redirect(reverse(
+				'keranjang_lihat',
+				args=[toko.slug,]
+				))
 		if postdata['submit'] == "hapus":
 			jenis.aktif = False
 			jenis.save(update_fields=['aktif'])
@@ -75,6 +79,11 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
 	item = Item.objects.filter(jenis=jenis, aktif=True)
+	grup_stat_item = []
+	stat_item = {}
+	for it in item:
+		stat_item['item'] = it
+		grup_stat_item.append(stat_item)
 	return render(request, 'katalog/daftar_item.jade', locals()) 
 
 @login_required

@@ -13,19 +13,15 @@ link(rel="Stylesheet", type="text/css",
 {% block isi %}
 h1 {{ toko.nama }}
 	small Pesanan Pelanggan
-.well
-	h3 {{ pesanan.pelanggan.nama }}
-
 
 {% if pesanan %}
 table.table.table-bordered#tabel_pesanan(summary="Daftar Pesanan")
-	caption Isi keranjang sewa
+	caption Isi keranjang pesanan
 	thead
 		tr
 			th(scope="col") Model
 			th(scope="col") Item
 			th(scope="col") Sewa/Unit
-			th
 	tbody
 		
 		{% for it in item %}
@@ -54,7 +50,9 @@ form(method="post", action="")
 	p Akhir: {{ pesanan.akhir }}
 	
 	{% if pesanan.pelanggan %}
-	p Pelanggan: {{ pesanan.pelanggan }}
+	p Pelanggan: 
+		a(href="{{ pesanan.pelanggan.get_absolute_url }}")
+			{{ pesanan.pelanggan }}
 	input.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="Checkout")
 	{% else %}

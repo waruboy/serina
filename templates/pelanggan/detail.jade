@@ -8,9 +8,13 @@
 		| Sejak {{ pelanggan.dibuat }}
 		.well
 			h4 Peminjaman
+			{% if ada_keranjang %}
+			em Keranjang sudah aktif
+			{% else %}
 			form(method="post", action="")
 				{% csrf_token %}
 				input.btn(type="submit", name="submit", value="Peminjaman Baru")
+			{% endif %}
 
 		h4 Catatan Peminjaman
 

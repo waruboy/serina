@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
 from django.utils import timezone
-from keranjang.keranjang import set_keranjang
+from keranjang.keranjang import cek_keranjang, set_keranjang
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
 from peminjaman.models import ItemPeminjaman, Peminjaman
@@ -35,15 +35,24 @@ def detail(request, kode_toko='', kode_pelanggan=''):
 	peminjaman = Peminjaman.objects.filter(pelanggan=pelanggan)
 	catatan_peminjaman = []
 	ada_pesanan = cek_pesanan(request)
+	ada_keranjang = cek_keranjang(request)
 	for p in peminjaman:
-		item_peminjaman = ItemPeminjaman.objects.filter(peminjaman=p)
+		item_peminjaman = ItemPeminjaman.objects.filter(
+			peminjaman=p)
 		catatan_peminjaman.append(item_peminjaman)
 	if request.method == "POST":
 		datapost = request.POST.copy()
 		if datapost['submit'] == "Peminjaman Baru":
 			set_keranjang(request, pelanggan)
+			return redirect(reverse(
+				'katalog_depan',
+				args=[toko.slug,]
+				))
 		if datapost['submit'] == "pesanan":
 			cantumkan_pelanggan(request, pelanggan)
+			return redirect(reverse(
+				'pesanan_lihat', args=[toko.slug]
+				))
 		if datapost['submit'] == "hapus":
 			pelanggan.diaktifkan = False
 			pelanggan.save(update_fields=['diaktifkan',])
