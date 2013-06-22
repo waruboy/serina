@@ -6,14 +6,16 @@
 		h1
 			small {{ jenis.nama }}
 
-		h4 Daftar Peminjaman
-
-
-		p
-			a(href="") Kapan
-		ul
-			li Status:
-			li Dipinjam:
+		h4 Pesanan
+		{% for pe in pesanan %}
+		{{ pe.pelanggan.nama }}
+		br 
+		{{ pe.awal }} - {{ pe.akhir }}
+		br
+		br
+		{% empty %}
+		em Tidak ada pesanan
+		{% endfor %}
 	.span4
 		.well
 			h4 Data

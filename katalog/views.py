@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse
 from django.forms import HiddenInput
 from django.shortcuts import redirect, render
 from django.utils.timezone import now
-from keranjang.keranjang import cek_keranjang, tambah_item_ke_keranjang
+from keranjang.keranjang import (cek_keranjang, 
+	tambah_item_ke_keranjang)
+from pesanan.models import Pesanan
 from pesanan.utils import cek_pesanan, tambah_pesanan
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view, toko_slugify
@@ -105,6 +107,11 @@ def item_detail(request, kode_toko,
 	item = Item.objects.get(jenis=jenis, nama=nama_item)
 	item_baru = Item(jenis=jenis)
 	form = TambahItemForm(instance=item_baru)
+	pesanan = Pesanan.objects.filter(
+		aktif=True, 
+		check_out=True,
+		item__id__exact=item.id,
+		)
 
 	if request.method=="POST":
 		item.aktif = False
