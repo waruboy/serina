@@ -26,8 +26,18 @@ def lihat(request, kode_toko):
 				ada_pesanan = True
 
 		if postdata["submit"] == "Batal":
+
 			hapus_pesanan(request)
 			return redirect(toko)
+
+		if postdata['submit'] == "hapus":
+			pesanan = ambil_pesanan(request)
+			item_dihapus = pesanan.item.get(
+				pk= postdata['pk_item']
+				)
+			pesanan.item.remove(item_dihapus)
+			pesanan.save()
+			del item_dihapus
 
 	if ada_pesanan:
 		try:
@@ -35,6 +45,6 @@ def lihat(request, kode_toko):
 		except Pesanan.DoesNotExist:
 			hapus_cookie_pesanan(request)
 			return redirect(request.path)
-	
+		item = pesanan.item.all()
 
 	return render(request, 'pesanan/lihat.jade', locals())

@@ -34,6 +34,16 @@
 					value="tambah_keranjang") 
 					| Masukkan keranjang
 			{% endif %}
+			{% if ada_pesanan %}
+			form(method="POST", action="")
+				{% csrf_token %}
+				input(type="hidden", name="pk_item",
+				 value="{{ stat_item.item.pk }}")
+				button.btn.btn-primary(type="submit",
+					name="submit",
+					value="pesan") 
+					| pesan
+			{% endif %}
 		hr
 		{% endfor %}
 	.span4

@@ -1,5 +1,7 @@
 import random
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from katalog.models import Item
 from .models import Pesanan
 
 ID_PESANAN_SESSION_KEY = 'id_pesanan'
@@ -60,3 +62,12 @@ def hapus_pesanan(request):
 	pesanan.keterangan = "Batal"
 	pesanan.save(update_fields=['keterangan', 'aktif'])
 	hapus_cookie_pesanan(request)
+
+def tambah_pesanan(request):
+	postdata = request.POST.copy()
+	pk_item = postdata.get('pk_item', '')
+	item = get_object_or_404(Item, pk=pk_item)
+	pesanan = ambil_pesanan(request)
+	if item not in pesanan.item.all():
+		pesanan.item.add(item)
+		pesanan.save()

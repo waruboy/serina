@@ -4,6 +4,7 @@ from django.forms import HiddenInput
 from django.shortcuts import redirect, render
 from django.utils.timezone import now
 from keranjang.keranjang import cek_keranjang, tambah_item_ke_keranjang
+from pesanan.utils import cek_pesanan, tambah_pesanan
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view, toko_slugify
 from .forms import TambahItemForm
@@ -69,6 +70,12 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 				'keranjang_lihat',
 				args=[toko.slug,]
 				))
+		if postdata['submit'] == "pesan":
+			tambah_pesanan(request)
+			return redirect(reverse(
+				'pesanan_lihat',
+				args=[toko.slug,]
+				))
 		if postdata['submit'] == "hapus":
 			jenis.aktif = False
 			jenis.save(update_fields=['aktif'])
@@ -76,6 +83,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 				args=[toko.slug, kategori.slug]))
 	form.fields['jenis'].widget = HiddenInput()
 	ada_keranjang = cek_keranjang(request)
+	ada_pesanan = cek_pesanan(request)
 	jenis.dilihat = now()
 	jenis.save(update_fields=['dilihat'])
 	item = Item.objects.filter(jenis=jenis, aktif=True)
