@@ -22,8 +22,8 @@
 		p
 			a(href="{{ stat_item.item.nama }}/") {{ stat_item.item }}
 		ul
-			li Status:
-			li Dipinjam:
+			li Status: {{ stat_item.status }}
+			li Dipesan: {{ stat_item.pesanan_terdekat }}
 			{% if ada_keranjang %}
 			form(method="POST", action="")
 				{% csrf_token %}

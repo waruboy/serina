@@ -55,7 +55,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 		slug=slug_jenis)
 	item_baru = Item(jenis=jenis)
 	form = TambahItemForm(instance=item_baru)
-	
+
 	if request.method=="POST":
 		postdata = request.POST.copy()
 		# kalau form item baru
@@ -93,6 +93,19 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	stat_item = {}
 	for it in item:
 		stat_item['item'] = it
+		status = "Tersedia"
+		stat_item['status'] = status
+		pesanan_terdekat = Pesanan.objects.filter(
+			item__id=it.id,
+			check_out=True,
+			awal__gte=now().date(),
+			)
+		if pesanan_terdekat:
+			pesanan_terdekat = pesanan_terdekat[0]
+			status_pesanan = pesanan_terdekat.awal
+		else:
+			status_pesanan = "Tidak dipesan"
+		stat_item['pesanan_terdekat'] = status_pesanan
 		grup_stat_item.append(stat_item)
 	return render(request, 'katalog/daftar_item.jade', locals()) 
 
