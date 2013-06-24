@@ -1,5 +1,5 @@
 $(function(){
-	$("#mulai").datetimepicker({
+	$("#id_mulai").datetimepicker({
 		timeFormat: 'H:m:s',
 		dateFormat: 'yy-mm-dd',
 		timeText: "Waktu",
@@ -7,12 +7,12 @@ $(function(){
 		showMinute: 0,
 		showSecond: 0,
 		onClose: function( selectedDate ) {
-			$("#selesai").datetimepicker( 
+			$("#id_selesai").datetimepicker( 
 				"option", "minDate", selectedDate);
 
 		} 
 	});
-	$("#selesai").datetimepicker({
+	$("#id_selesai").datetimepicker({
 		timeFormat: 'H:m:s',
 		dateFormat: 'yy-mm-dd',
 		timeText: "Waktu",
@@ -20,7 +20,7 @@ $(function(){
 		showMinute: 0,
 		showSecond: 0,
 		onClose: function( selectedDate ) {
-			$("#mulai").datetimepicker(
+			$("#id_mulai").datetimepicker(
 				"option", "maxDate", selectedDate);
 		}
 	});

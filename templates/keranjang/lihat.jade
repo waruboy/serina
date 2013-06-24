@@ -49,11 +49,7 @@ table.table.table-bordered#keranjang_sewa(summary="Keranjang Penyewaan")
 
 form(method="post", action="")
 	{% csrf_token %}
-	p Mulai
-	input#mulai(type="text", name="mulai")
-	p Selesai
-	input#selesai(type="text", name="selesai")
-	br
+	{{ form.as_p }}
 	input.btn.btn-large.btn-primary(type="submit", 
 		name="submit", value="Checkout")
 	input.btn.btn-large.btn-danger.pull-right(type="submit", 

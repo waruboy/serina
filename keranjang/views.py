@@ -4,6 +4,7 @@ from katalog.models import Item
 from peminjaman.utils import checkout
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
+from .forms import CheckoutKeranjangForm
 from .models import ItemKeranjang
 from .keranjang import ID_KERANJANG_SESSION_KEY, hapus_keranjang
 
@@ -11,7 +12,7 @@ from .keranjang import ID_KERANJANG_SESSION_KEY, hapus_keranjang
 @cek_izin
 def lihat(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
-
+	form = CheckoutKeranjangForm()
 	keranjang = ItemKeranjang.objects.get(
 		id_keranjang = request.session[ID_KERANJANG_SESSION_KEY],
 		check_out =  False
@@ -26,8 +27,10 @@ def lihat(request, kode_toko):
 			keranjang.save()
 			del item_dihapus
 		if postdata['submit'] == "Checkout":
-			checkout(request)
-			return redirect(toko)
+			form = CheckoutKeranjangForm(postdata)
+			if form.is_valid():
+				checkout(request)
+				return redirect(toko)
 		if postdata['submit'] == "Batal":
 			hapus_keranjang(request)
 			return redirect(toko)
