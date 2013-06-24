@@ -76,7 +76,9 @@ class Item(models.Model):
 		return self.ambil_url_absolut()
 
 	def clean(self):
-		nama_ganda = Item.objects.filter(jenis=self.jenis, nama=self.nama)
+		nama_ganda = Item.objects.filter(
+			jenis__kategori__toko__id=self.jenis.kategori.toko.id, 
+			nama=self.nama)
 		if self.pk:
 			nama_ganda = nama_ganda.exclude(pk=self.pk)
 		if nama_ganda:
