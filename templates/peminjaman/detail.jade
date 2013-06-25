@@ -1,24 +1,49 @@
 {% extends 'dalam.jade' %} 
 {% block isi %}
+
 h1 Detail Peminjaman
 hr
-h1	
-	small {{ peminjaman.pelanggan.nama }}
-p {{ peminjaman.mulai }} - {{ peminjaman.selesai }}
-{% if not peminjaman.dikembalikan %}
-p Belum dikembalikan
-{% else %}
-p Sudah dikembalikan
-{% endif %}
-h4 Yang dipinjam
-ul
-	{% for itpem in item_peminjaman %}
-	li
-		|  {{ itpem.item.jenis }}
-		a(href="{{ itpem.item.get_absolute_url }}"){{ itpem.item.nama }}
-		
+.row
+	.span8
+		h1	
+			small {{ peminjaman.pelanggan.nama }}
+		p {{ peminjaman.mulai }} - {{ peminjaman.selesai }}
+		{% if not peminjaman.dikembalikan %}
+		p Belum dikembalikan
+		{% else %}
+		p Sudah dikembalikan
+		{% endif %}
+		br
+		h4 Yang dipinjam
+		ul
+			{% for itpem in item_peminjaman %}
+			li
+				|  {{ itpem.item.jenis }}
+				a(href="{{ itpem.item.get_absolute_url }}"){{ itpem.item.nama }}
+				
 
-	{% endfor %}
+			{% endfor %}
+		br 
+
+		h4 Keterangan
+		p {{ peminjaman.keterangan |default:"Tidak ada keterangan" }}
+		br
+		form(method="POST", action="")
+			{% csrf_token %}
+			{{ form.as_p }}
+			button#submit.btn(name="submit", value="keterangan")
+				| Perbarui
+	.span4
+		.well
+			h4 Pengembalian
+			{% if peminjaman.dikembalikan %}
+			| Sudah selesai dikembalikan
+			{% else %}
+			form(method="POST", action="")
+				{% csrf_token %}
+				button#submit.btn.btn-primary(name="submit", value="selesai")
+					| Tandai selesai
+			{% endif %}
 
 
 
