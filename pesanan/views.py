@@ -55,3 +55,10 @@ def lihat(request, kode_toko):
 		item = pesanan.item.all()
 
 	return render(request, 'pesanan/lihat.jade', locals())
+
+def detail(request, kode_toko, pk):
+	(pengguna, toko) = inisiasi_view(request, kode_toko)
+	pesanan = Pesanan.objects.get(pk=pk)
+	item = pesanan.item.all()
+
+	return render(request, 'pesanan/detail.jade', locals())

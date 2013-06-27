@@ -10,7 +10,8 @@
 		{% for pe in pesanan %}
 		{{ pe.pelanggan.nama }}
 		br 
-		{{ pe.awal }} - {{ pe.akhir }}
+		a(href="{{ pe.get_absolute_url }}")
+			{{ pe.awal }} - {{ pe.akhir }}
 		br
 		br
 		{% empty %}

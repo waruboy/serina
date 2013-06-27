@@ -1,0 +1,65 @@
+{% extends 'dalam.jade' %} 
+
+{% block css %}
+
+{{ block.super }}
+link(rel="Stylesheet", type="text/css",
+	href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.3.custom.min.css")
+link(rel="Stylesheet", type="text/css",
+	href="{{ STATIC_URL }}css/jquery-ui-timepicker-addon.css")
+
+{% endblock css %}
+
+{% block isi %}
+h1 {{ toko.nama }}
+	small Detail Pesanan
+.row-fluid
+	p Pemesan: 
+		a(href="{{ pesanan.pelanggan.get_absolute_url }}")
+			{{ pesanan.pelanggan }}
+
+	table.table.table-bordered#tabel_pesanan(summary="Daftar Pesanan")
+		caption Isi keranjang pesanan
+		thead
+			tr
+				th(scope="col") Model
+				th(scope="col") Item
+				th(scope="col") Sewa/Unit
+		tbody
+			
+			{% for it in item %}
+			tr
+				td 
+					a(href="{{ it.jenis.ambil_url_absolut }}") {{ it.jenis.nama }}
+				td
+					a(href="{{ it.ambil_url_absolut }}") {{ it.nama }}
+				td
+					{{ it.jenis.sewa_per_unit }}
+				td
+					form(method="post", action="")
+						{% csrf_token %}
+						input(type="hidden", 
+							name="pk_item", 
+							value="{{ it.pk }}")
+						input.btn.btn-small(type="submit",
+							name="submit",
+							value="hapus")
+			{% endfor %}
+
+
+
+
+
+{% endblock isi %}
+
+{% block skrip %}
+
+{{ block.super }}
+script(type="text/javascript", 
+	src="{{ STATIC_URL }}/js/jquery-ui-1.10.3.custom.min.js")
+script(type="text/javascript",
+	src="{{ STATIC_URL }}/js/jquery-ui-timepicker-addon.js")
+script(type="text/javascript",
+	src="{{ STATIC_URL }}js/pesanan.js")
+
+{% endblock skrip %}

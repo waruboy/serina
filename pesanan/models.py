@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from katalog.models import Item
 from pelanggan.models import Pelanggan
@@ -24,3 +25,10 @@ class Pesanan(models.Model):
 			return "%s %s" % (self.pelanggan.nama,  "draft")
 		else:
 			return "draft %s" % (self.pemilik)
+
+	def get_absolute_url(self):
+		toko = self.pelanggan.toko
+		link = reverse(
+			'pesanan_detail', 
+			args=[toko.slug, self.pk])
+		return link
