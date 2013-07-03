@@ -56,6 +56,46 @@ def lihat(request, kode_toko):
 
 	return render(request, 'pesanan/lihat.jade', locals())
 
+def berlangsung(request, kode_toko):
+	(pengguna, toko) = inisiasi_view(request, kode_toko)
+	ada_pesanan = cek_pesanan(request)
+	
+
+	if request.method == "POST":
+		postdata = request.POST.copy()
+
+
+		if postdata["submit"] == "Batal":
+
+			hapus_pesanan(request)
+			return redirect(toko)
+
+		if postdata['submit'] == "hapus":
+			pesanan = ambil_pesanan(request)
+			item_dihapus = pesanan.item.get(
+				pk= postdata['pk_item']
+				)
+			pesanan.item.remove(item_dihapus)
+			pesanan.save()
+			del item_dihapus
+
+		if postdata['submit'] == "Checkout":
+			pesanan = ambil_pesanan(request)
+			pesanan.check_out = True
+			pesanan.save()
+			hapus_cookie_pesanan(request)
+			return redirect(toko)
+
+
+	try:
+		pesanan = ambil_pesanan(request)
+	except Pesanan.DoesNotExist:
+		hapus_cookie_pesanan(request)
+		return redirect(request.path)
+	item = pesanan.item.all()
+
+	return render(request, 'pesanan/berlangsung.jade', locals())
+
 def detail(request, kode_toko, pk):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	pesanan = Pesanan.objects.get(pk=pk)

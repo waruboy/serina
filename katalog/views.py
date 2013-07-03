@@ -75,7 +75,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 		if postdata['submit'] == "pesan":
 			tambah_pesanan(request)
 			return redirect(reverse(
-				'pesanan_lihat',
+				'pesanan_berlangsung',
 				args=[toko.slug,]
 				))
 		if postdata['submit'] == "hapus":

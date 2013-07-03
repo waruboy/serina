@@ -1,5 +1,6 @@
 {% extends 'dasar.jade' %}
 {% load keranjang_tags %}
+{% load pesanan_tags %}
 
 
 {% block isi_navbar %}
@@ -12,6 +13,7 @@
 				a(href = "/logout/") Logout
 	ul.nav.pull-right
 		li 
+			{% link_pesanan request toko %}
 			{% link_keranjang request toko %}
 	
 {% endblock isi_navbar %}
