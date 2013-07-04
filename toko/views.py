@@ -2,12 +2,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import (render, redirect)
+from django.utils import timezone
 
 from .utils import inisiasi_view
 
 @login_required
 def toko(request, kode_toko=''):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
+	toko.dilihat = timezone.now()
+	toko.save(update_fields=['dilihat',])
 	return render(request,'toko.jade',locals())
 
 def keluar(request):
