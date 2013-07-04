@@ -10,6 +10,8 @@
 			h4 Peminjaman
 			{% if ada_keranjang %}
 			em Keranjang sudah aktif
+			{% elif ada_pesanan %}
+			em Pesanan sudah aktif, batalkan pesanan untuk membuat peminjaman baru
 			{% else %}
 			form(method="post", action="")
 				{% csrf_token %}
