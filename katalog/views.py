@@ -133,7 +133,7 @@ def item_detail(request, kode_toko,
 			args=[toko.slug, kategori.slug, jenis.slug]))
 
 	form.fields['jenis'].widget = HiddenInput()
-	jenis.dilihat = now()
-	jenis.save(update_fields=['dilihat'])
+	item.dilihat = now()
+	item.save(update_fields=['dilihat'])
 	#item = Item.objects.filter(jenis=jenis)
 	return render(request, 'katalog/item_detail.jade', locals()) 
