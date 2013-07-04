@@ -43,11 +43,16 @@ h1 {{ toko.nama }}
 		{% else %}
 		p
 			em Tidak ada pesanan
+		{% if ada_keranjang %}
+		p
+			em Keranjang peminjaman aktif. Batalkan keranjang untuk membuat peminjaman.
+		{% else %}
 		form(method="post", action="")
 			{% csrf_token %}
 			{{ form.as_p }}
 			button.btn.btn-large.btn-primary(type="submit", 
 				name="submit", value="buat") Buat pesanan
+		{% endif %}
 		{% endif %}
 
 

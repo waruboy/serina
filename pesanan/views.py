@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
+from keranjang.keranjang import cek_keranjang
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
+
 
 from .forms import BuatPesananForm
 from .models import Pesanan
@@ -14,6 +16,7 @@ from .utils import (ambil_pesanan, buat_pesanan, cek_pesanan,
 def lihat(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	ada_pesanan = cek_pesanan(request)
+	ada_keranjang = cek_keranjang(request)
 	
 	form = BuatPesananForm()
 
