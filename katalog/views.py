@@ -6,7 +6,7 @@ from django.utils.timezone import now
 from keranjang.keranjang import (cek_keranjang, 
 	tambah_item_ke_keranjang)
 from pesanan.models import Pesanan
-from pesanan.utils import cek_pesanan, tambah_pesanan
+from pesanan.utils import ambil_pesanan, cek_pesanan, tambah_pesanan
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view, toko_slugify
 from .forms import TambahItemForm
@@ -74,10 +74,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 				))
 		if postdata['submit'] == "pesan":
 			tambah_pesanan(request)
-			return redirect(reverse(
-				'pesanan_berlangsung',
-				args=[toko.slug,]
-				))
+			return redirect(jenis)
 		if postdata['submit'] == "hapus":
 			jenis.aktif = False
 			jenis.save(update_fields=['aktif'])
@@ -100,10 +97,15 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 			check_out=True,
 			awal__gte=now().date(),
 			)
+		status_pesanan = ""
 		if pesanan_terdekat:
 			pesanan_terdekat = pesanan_terdekat[0]
 			status_pesanan = pesanan_terdekat.awal
-		else:
+		if ada_pesanan:
+			pesanan = ambil_pesanan(request)
+			if it in pesanan.item.all() :
+				status_pesanan = "Sedang dipesan"
+		if not status_pesanan:
 			status_pesanan = "Tidak dipesan"
 		stat_item['pesanan_terdekat'] = status_pesanan
 		grup_stat_item.append(stat_item)

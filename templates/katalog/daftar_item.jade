@@ -34,7 +34,7 @@
 					value="tambah_keranjang") 
 					| Masukkan keranjang
 			{% endif %}
-			{% if ada_pesanan %}
+			{% if ada_pesanan and stat_item.pesanan_terdekat == "Tidak dipesan" %}
 			form(method="POST", action="")
 				{% csrf_token %}
 				input(type="hidden", name="pk_item",

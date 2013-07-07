@@ -46,6 +46,9 @@ class Jenis(models.Model):
 				self.slug
 				))
 
+	def get_absolute_url(self):
+		return self.ambil_url_absolut()
+
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			unique_slugify(self, self.nama, 'slug', Jenis.objects.filter(kategori=self.kategori))
