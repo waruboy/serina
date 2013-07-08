@@ -18,6 +18,7 @@ class Peminjaman(models.Model):
 		decimal_places=2)
 	keterangan = models.TextField(blank=True)
 	dikembalikan = models.BooleanField(default=False)
+	aktif = models.BooleanField(default=True)
 
 	class Meta:
 		ordering = ['-ditambahkan']

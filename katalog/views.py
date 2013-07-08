@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.utils.timezone import now
 from keranjang.keranjang import (cek_keranjang, 
 	tambah_item_ke_keranjang)
+from peminjaman.models import Peminjaman
 from pesanan.models import Pesanan
 from pesanan.utils import ambil_pesanan, cek_pesanan, tambah_pesanan
 from toko.decorators import cek_izin
@@ -91,6 +92,12 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 	for it in item:
 		stat_item['item'] = it
 		status = "Tersedia"
+		peminjaman_item = Peminjaman.objects.filter(
+			dikembalikan = False,
+			item__id = it.id,
+			)
+		if peminjaman_item:
+			status = "Sedang Dipinjam"
 		stat_item['status'] = status
 		pesanan_terdekat = Pesanan.objects.filter(
 			item__id=it.id,
@@ -122,6 +129,10 @@ def item_detail(request, kode_toko,
 	item = Item.objects.get(jenis=jenis, nama=nama_item)
 	item_baru = Item(jenis=jenis)
 	form = TambahItemForm(instance=item_baru)
+	peminjaman = Peminjaman.objects.filter(
+		aktif=True,
+		item__id = item.id,
+		)
 	pesanan = Pesanan.objects.filter(
 		aktif=True, 
 		check_out=True,

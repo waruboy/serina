@@ -17,6 +17,18 @@
 		{% empty %}
 		em Tidak ada pesanan
 		{% endfor %}
+
+		h4 Peminjaman
+		{% for pe in peminjaman %}
+		{{ pe.pelanggan.nama }}
+		br 
+		a(href="{{ pe.get_absolute_url }}")
+			{{ pe.mulai }} - {{ pe.selesai }}
+		br
+		br
+		{% empty %}
+		em Tidak ada peminjaman
+		{% endfor %}
 	.span4
 		.well
 			h4 Data
