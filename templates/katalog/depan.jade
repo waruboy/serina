@@ -2,20 +2,33 @@
 {% block isi %}
 h1 {{ toko.nama }}
 	small Kategori
-.well
-	h3 Kategori Baru
-	form(action="", method="post")
-		{% csrf_token %}
-		fieldset
-			input#id_nama(name="nama",type="text", placeholder="Nama")
-			br
-			button.btn(type="submit") Tambah Kategori
+.row
+	.span8
+		.well
+			h3 Kategori Baru
+			form(action="", method="post")
+				{% csrf_token %}
+				fieldset
+					input#id_nama(name="nama",type="text", placeholder="Nama")
+					br
+					button.btn(type="submit") Tambah Kategori
 
-h4 Daftar Kategori
-ul
-	{% for k in kategori %}
-	li
-		a(href=k.slug+"/") {{ k.nama.title }}
-	{% endfor %}
+		h4 Daftar Kategori
+		ul
+			{% for k in kategori %}
+			li
+				a(href=k.slug+"/") {{ k.nama.title }}
+			{% endfor %}
+	.span4
+		.well
+			h4 Cari Item
+			form(action="{% url 'cari_hasil' toko.slug %}", method="get")
+				input#q(
+					type="text", 
+					name="q", 
+					placeholder="nama"
+					) 
+				button.btn(type="submit",
+					name="submit", value="cari_item") Cari
 
 {% endblock isi %}

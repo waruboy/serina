@@ -2,13 +2,13 @@
 
 {% block isi %}
 
-h1 Pelanggan
-p Pencarian telepon: {{ q }}
-{% for pelanggan in cocok.pelanggan %}
-a(href="{{ pelanggan.get_absolute_url }}") {{ pelanggan.nama }}
+h1 {{ objek_cari }}
+p Pencarian {{ kolom_cari }}: {{ q }}
+{% for c in cocok %}
+a(href="{{ c.get_absolute_url }}") {{ c }}
 
 {% empty %}
-em Tidak ada pelanggan yang cocok.
+em Tidak ada yang cocok.
 
 {% endfor %}
 
