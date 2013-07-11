@@ -3,6 +3,18 @@
 h1 Laut Lepas
 	small Peminjaman
 
+h4 Peminjaman Belum Selesai
+ol
+	{% for p in grup_peminjaman_di_luar %}
+	li 
+		a(href="{{ p.peminjaman.get_absolute_url }}")
+			| {{ p.peminjaman }}
+		{% if p.terlambat %}
+		.label.label-important
+			| terlambat
+		{% endif %}
+	{% endfor %}
+
 h4 Peminjaman Pekan Ini
 ul
 	{% for p in peminjaman %}

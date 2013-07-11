@@ -1,4 +1,6 @@
+import datetime
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from django.shortcuts import render
 from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
@@ -9,6 +11,20 @@ from .models import ItemPeminjaman, Peminjaman
 @cek_izin
 def daftar(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
+	grup_peminjaman_di_luar = []
+	stat_peminjaman_di_luar = {}
+	peminjaman_di_luar = Peminjaman.objects.filter(
+		pelanggan__toko=toko,
+		dikembalikan =False,
+		)
+	hari_ini = datetime.date.today()
+	for p in peminjaman_di_luar:
+		stat_peminjaman_di_luar['peminjaman'] = p 
+		if p.selesai < timezone.now() :
+			stat_peminjaman_di_luar['terlambat'] = True
+
+		grup_peminjaman_di_luar.append(stat_peminjaman_di_luar)
+
 	peminjaman = Peminjaman.objects.filter(pelanggan__toko=toko)
 
 
