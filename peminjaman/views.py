@@ -12,20 +12,31 @@ from .models import ItemPeminjaman, Peminjaman
 def daftar(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	grup_peminjaman_di_luar = []
-	stat_peminjaman_di_luar = {}
 	peminjaman_di_luar = Peminjaman.objects.filter(
 		pelanggan__toko=toko,
 		dikembalikan =False,
 		)
-	hari_ini = datetime.date.today()
+
+
 	for p in peminjaman_di_luar:
+		stat_peminjaman_di_luar = {}
 		stat_peminjaman_di_luar['peminjaman'] = p 
 		if p.selesai < timezone.now() :
 			stat_peminjaman_di_luar['terlambat'] = True
 
 		grup_peminjaman_di_luar.append(stat_peminjaman_di_luar)
 
-	peminjaman = Peminjaman.objects.filter(pelanggan__toko=toko)
+	minggu_ini_min = datetime.datetime.combine(
+		datetime.date.today(), 
+		datetime.time.min
+		)
+	minggu_ini_max = datetime.datetime.combine(
+		datetime.date.today(), datetime.time.max
+		)
+	peminjaman = Peminjaman.objects.filter(
+		pelanggan__toko=toko,
+		selesai__range=(minggu_ini_min, minggu_ini_max)
+		)
 
 
 	return render(request, 'peminjaman/daftar.jade', locals())
