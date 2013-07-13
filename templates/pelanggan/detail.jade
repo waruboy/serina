@@ -21,13 +21,15 @@
 		h4 Catatan Peminjaman
 
 		{% for peminjaman in catatan_peminjaman %}
-		p {{ peminjaman.0.peminjaman.mulai }}
+		p 
+			a(href="{{ peminjaman.0.peminjaman.get_absolute_url}}")
+				{{ peminjaman.0.peminjaman.mulai }}
 		ul
 			{% for ai in peminjaman %}
 			li 
-				| {{ ai.item.jenis.nama }}  
 				a(href="{{ ai.item.get_absolute_url }}")
 					{{ ai.item.nama }}
+				| - {{ ai.item.jenis.nama }}  
 			{% endfor %}
 		{% endfor %}
 
