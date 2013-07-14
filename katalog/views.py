@@ -97,7 +97,7 @@ def daftar_item(request, kode_toko, slug_kategori, slug_jenis):
 			item__id = it.id,
 			)
 		if peminjaman_item:
-			status = "Sedang Dipinjam"
+			status = "Sedang dipinjam"
 		stat_item['status'] = status
 		pesanan_terdekat = Pesanan.objects.filter(
 			item__id=it.id,
