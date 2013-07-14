@@ -28,11 +28,7 @@ hr
 		h4 Keterangan
 		p {{ peminjaman.keterangan |default:"Tidak ada keterangan" }}
 		br
-		form(method="POST", action="")
-			{% csrf_token %}
-			{{ form.as_p }}
-			button#submit.btn(name="submit", value="keterangan")
-				| Perbarui
+		
 	.span4
 		.well
 			h4 Pengembalian
@@ -44,6 +40,12 @@ hr
 				button#submit.btn.btn-primary(name="submit", value="selesai")
 					| Tandai selesai
 			{% endif %}
+		.well
+			form(method="POST", action="")
+			{% csrf_token %}
+			{{ form.as_p }}
+			button#submit.btn(name="submit", value="keterangan")
+				| Perbarui
 
 
 

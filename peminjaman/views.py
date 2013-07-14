@@ -27,7 +27,7 @@ def daftar(request, kode_toko):
 		grup_peminjaman_di_luar.append(stat_peminjaman_di_luar)
 
 	minggu_ini_min = datetime.datetime.combine(
-		datetime.date.today(), 
+		datetime.date.today()-datetime.timedelta(days=7), 
 		datetime.time.min
 		)
 	minggu_ini_max = datetime.datetime.combine(
@@ -35,7 +35,7 @@ def daftar(request, kode_toko):
 		)
 	peminjaman = Peminjaman.objects.filter(
 		pelanggan__toko=toko,
-		selesai__range=(minggu_ini_min, minggu_ini_max)
+		mulai__range=(minggu_ini_min, minggu_ini_max)
 		)
 
 
