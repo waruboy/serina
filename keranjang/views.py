@@ -6,13 +6,16 @@ from toko.decorators import cek_izin
 from toko.utils import inisiasi_view
 from .forms import CheckoutKeranjangForm
 from .models import ItemKeranjang
-from .keranjang import ID_KERANJANG_SESSION_KEY, hapus_keranjang
+from .keranjang import ID_KERANJANG_SESSION_KEY, cek_keranjang, hapus_keranjang
 
 @login_required
 @cek_izin
 def lihat(request, kode_toko):
 	(pengguna, toko) = inisiasi_view(request, kode_toko)
 	form = CheckoutKeranjangForm()
+	ada_keranjang = cek_keranjang(request)
+	if not ada_keranjang:
+		return redirect(toko)
 	keranjang = ItemKeranjang.objects.get(
 		id_keranjang = request.session[ID_KERANJANG_SESSION_KEY],
 		check_out =  False
